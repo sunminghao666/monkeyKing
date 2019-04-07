@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monkey.mapper.UserPatientMapper">
+  <resultMap id="BaseResultMap" type="com.monkey.dto.UserPatient">
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="patient_name" jdbcType="VARCHAR" property="patientName" />
+    <result column="patient_sex" jdbcType="INTEGER" property="patientSex" />
+    <result column="patient_phone_no" jdbcType="VARCHAR" property="patientPhoneNo" />
+    <result column="patient_age" jdbcType="INTEGER" property="patientAge" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, gmt_create, gmt_modify, user_id, patient_name, patient_sex, patient_phone_no, 
+    patient_age
+  </sql>
+
+  <insert id="saveUserPatient" parameterType="com.monkey.dto.UserPatient">
+    insert into user_patient
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModify != null">
+        gmt_modify,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="patientName != null">
+        patient_name,
+      </if>
+      <if test="patientSex != null">
+        patient_sex,
+      </if>
+      <if test="patientPhoneNo != null">
+        patient_phone_no,
+      </if>
+      <if test="patientAge != null">
+        patient_age,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null">
+        #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="patientName != null">
+        #{patientName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientSex != null">
+        #{patientSex,jdbcType=INTEGER},
+      </if>
+      <if test="patientPhoneNo != null">
+        #{patientPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="patientAge != null">
+        #{patientAge,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+	<select id="searchUserPatient" parameterType="java.util.Map" resultMap="BaseResultMap" >
+		select
+			<include refid="Base_Column_List" />
+		from
+			user_patient
+			<where>
+				<if test="userId != null">
+					user_id = #{userId,jdbcType=BIGINT}
+				</if>
+			</where>
+	</select>
+
+</mapper>

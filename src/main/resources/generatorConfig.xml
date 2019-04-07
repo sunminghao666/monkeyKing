@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+  <context id="context1">
+    <!--取消注释  插件会生成很多注释 -->
+     <commentGenerator>
+        <property name="suppressAllComments" value="true"/>
+    </commentGenerator>
+    <!-- 连接数据库   connectionURL：-->
+    <jdbcConnection connectionURL="jdbc:mysql://123.56.30.228:3306/monkeyKing" driverClass="com.mysql.jdbc.Driver" userId="root" password="1q2w3e4r" />
+      <!-- 生成pojo位置 -->
+    <javaModelGenerator targetPackage="com.monkey.dto" targetProject="monkeyKing/src/main/java"/>
+     <!-- mapper生成位置 -->
+    <sqlMapGenerator targetPackage="mapper" targetProject="monkeyKing/src/main/resources" />
+    <!-- targetPackage：mapper接口生成的位置 -->  
+    <javaClientGenerator targetPackage="com.monkey.dao" targetProject="monkeyKing/src/main/java" type="XMLMAPPER" />
+    <!--数据库里面的表名  -->
+    <table  tableName="user_patient"></table>
+  </context>
+</generatorConfiguration>
