@@ -1,6 +1,10 @@
 package com.monkey.bean.respBean;
 
-public class SearchPatientBean {
+import java.io.Serializable;
+
+public class SearchPatientBean implements Serializable {
+
+	private static final long serialVersionUID = 4054073907289814834L;
 
 	private Long patientId;
 
