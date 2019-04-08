@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.monkey.db.base.dao.PwbConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.monkey.db.base.pojo.PwbConfig" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="config_code" property="configCode" jdbcType="VARCHAR" />
+    <result column="config_value" property="configValue" jdbcType="VARCHAR" />
+    <result column="config_explain" property="configExplain" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="date_created" property="dateCreated" jdbcType="TIMESTAMP" />
+    <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
+    <result column="date_updated" property="dateUpdated" jdbcType="TIMESTAMP" />
+    <result column="updated_by" property="updatedBy" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, config_code, config_value, config_explain, status, date_created, created_by, 
+    date_updated, updated_by, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.monkey.db.base.pojo.PwbConfigExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from pwb_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from pwb_config
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from pwb_config
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.monkey.db.base.pojo.PwbConfigExample" >
+    delete from pwb_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.monkey.db.base.pojo.PwbConfig" useGeneratedKeys="true" keyProperty="id">
+    insert into pwb_config (id, config_code, config_value, 
+      config_explain, status, date_created, 
+      created_by, date_updated, updated_by, 
+      remark)
+    values (#{id,jdbcType=BIGINT}, #{configCode,jdbcType=VARCHAR}, #{configValue,jdbcType=VARCHAR}, 
+      #{configExplain,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{dateCreated,jdbcType=TIMESTAMP}, 
+      #{createdBy,jdbcType=VARCHAR}, #{dateUpdated,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.monkey.db.base.pojo.PwbConfig" useGeneratedKeys="true" keyProperty="id">
+    insert into pwb_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="configCode != null" >
+        config_code,
+      </if>
+      <if test="configValue != null" >
+        config_value,
+      </if>
+      <if test="configExplain != null" >
+        config_explain,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="dateCreated != null" >
+        date_created,
+      </if>
+      <if test="createdBy != null" >
+        created_by,
+      </if>
+      <if test="dateUpdated != null" >
+        date_updated,
+      </if>
+      <if test="updatedBy != null" >
+        updated_by,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="configCode != null" >
+        #{configCode,jdbcType=VARCHAR},
+      </if>
+      <if test="configValue != null" >
+        #{configValue,jdbcType=VARCHAR},
+      </if>
+      <if test="configExplain != null" >
+        #{configExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="dateCreated != null" >
+        #{dateCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="dateUpdated != null" >
+        #{dateUpdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null" >
+        #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.monkey.db.base.pojo.PwbConfigExample" resultType="java.lang.Integer" >
+    select count(*) from pwb_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pwb_config
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.configCode != null" >
+        config_code = #{record.configCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.configValue != null" >
+        config_value = #{record.configValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.configExplain != null" >
+        config_explain = #{record.configExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dateCreated != null" >
+        date_created = #{record.dateCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createdBy != null" >
+        created_by = #{record.createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dateUpdated != null" >
+        date_updated = #{record.dateUpdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedBy != null" >
+        updated_by = #{record.updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pwb_config
+    set id = #{record.id,jdbcType=BIGINT},
+      config_code = #{record.configCode,jdbcType=VARCHAR},
+      config_value = #{record.configValue,jdbcType=VARCHAR},
+      config_explain = #{record.configExplain,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      date_created = #{record.dateCreated,jdbcType=TIMESTAMP},
+      created_by = #{record.createdBy,jdbcType=VARCHAR},
+      date_updated = #{record.dateUpdated,jdbcType=TIMESTAMP},
+      updated_by = #{record.updatedBy,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.monkey.db.base.pojo.PwbConfig" >
+    update pwb_config
+    <set >
+      <if test="configCode != null" >
+        config_code = #{configCode,jdbcType=VARCHAR},
+      </if>
+      <if test="configValue != null" >
+        config_value = #{configValue,jdbcType=VARCHAR},
+      </if>
+      <if test="configExplain != null" >
+        config_explain = #{configExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="dateCreated != null" >
+        date_created = #{dateCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null" >
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="dateUpdated != null" >
+        date_updated = #{dateUpdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null" >
+        updated_by = #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.monkey.db.base.pojo.PwbConfig" >
+    update pwb_config
+    set config_code = #{configCode,jdbcType=VARCHAR},
+      config_value = #{configValue,jdbcType=VARCHAR},
+      config_explain = #{configExplain,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      date_created = #{dateCreated,jdbcType=TIMESTAMP},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      date_updated = #{dateUpdated,jdbcType=TIMESTAMP},
+      updated_by = #{updatedBy,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectStatus" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from pwb_config
+    group by status
+  </select>
+  <select id="testPage" resultType="java.util.Map">
+	select * from pwb_config
+		limit
+		#{params.firstEntityIndex},#{params.pageSize}
+  </select>
+  <select id="countPage" resultType="java.lang.Integer">
+		select
+		count(id)
+		from
+		pwb_config
+  </select>
+  <select id="testLiatPage" resultType="java.util.Map">
+	select * from pwb_config
+	<where>
+     <if test="params.configCode !=null">
+   	 	config_code=#{params.configCode}
+     </if>
+     <if test="params.configExplain !=null">
+     	and config_explain like "%"#{params.configExplain}"%" 
+     </if>
+    </where>
+		limit
+		#{params.firstEntityIndex},#{params.pageSize}
+  </select>
+</mapper>

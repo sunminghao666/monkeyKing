@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>资源管理</title>
+<link rel="stylesheet" type="text/css"
+	href="../../component/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../../css/common.css" />
+<script src="../../js/util/jquery-1.11.2.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="../../component/bootstrap/bootstrap.min.js"
+	type="text/javascript" charset="utf-8"></script>
+<script src="../../js/util/base.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="../../js/util/back.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="../../js/util/ie8.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="../../js/util/common.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="../../js/util/json2.js" type="text/javascript"
+	charset="utf-8"></script>
+<script type="text/javascript" src="../../js/util/titPackage.js"
+	charset="utf-8"></script>
+<script type="text/javascript"
+	src="../../component/common/dictionary.js" charset="utf-8"></script>
+<link rel="stylesheet" href="../../css/manage/resourceManage.css" />
+<link rel="stylesheet" href="../../component/ztree/zTreeStyle.css" />
+<style>
+form input {
+	width: 95%;
+	height: 35px;
+	line-height: 35px;
+	padding-left: 5px;
+	color: #444444;
+	border: 1px solid #dfdfdf;
+	border-radius: 3px;
+}
+</style>
+</head>
+<body>
+	<div style="padding-left: 40px; padding-right: 40px;">
+		<!--定义资源数量-->
+		<input type="hidden" id="count" value="0" />
+		<!--定义每页数量-->
+		<input type="hidden" id="itemnum" value="10" />
+		<!--定义初始化页码-->
+		<input type="hidden" id="pagenum" value="1" />
+		<div class="useManage_right">
+			<!--条件查询-->
+			<div class="query_criteria">
+				<img src="../../img/login_icon.png"> <span>查询条件</span>
+			</div>
+			<div class="useManage_select">
+				<form>
+					<table class="useManage_select_table"
+						style="width: 97%; margin-left: auto; margin-right: auto;">
+						<tr>
+							<td width="8%">资源编码：</td>
+							<td width="30%"><input type="text" id="resourceCode">
+							</td>
+							<td width="8%">资源名称：</td>
+							<td width="30%"><input type="text" id="resourceName">
+							</td>
+						</tr>
+					</table>
+				</form>
+				<div class="useManage_select_query" id="queryResource">查询</div>
+			</div>
+			<!--资源信息-->
+			<div class="useManage_article">
+				<!-- 资源信息 -->
+				<div class="query_criteria">
+					<img src="../../img/login_icon.png"> <span>查询结果</span>
+				</div>
+				<table class="useManage_article_table">
+					<thead>
+						<tr>
+							<th class="um_th_1"><input id='checkResIndex'
+								type='checkbox' name='checkResNameIndex' /></th>
+							<th class="um_th_2">资源Id</th>
+							<th class="um_th_2">资源编码</th>
+							<th class="um_th_5">资源名称</th>
+							<th class="um_th_4">资源类型</th>
+							<th class="um_th_5">资源路径</th>
+							<th class="um_th_6">排序号</th>
+							<th class="um_th_7">父资源名称</th>
+							<th class="um_th_8">启用标识</th>
+						</tr>
+					</thead>
+					<tbody id="content"></tbody>
+				</table>
+				<div id="noCus" class="noproduct" align="center"
+					style="display: none;">
+					<div>
+						<img src="../../img/magnifier.png" alt="" class="noproduct"
+							style="width: 20px" />
+					</div>
+					对不起，没有查询到您需要的资源信息!
+				</div>
+				<!--分页-->
+				<div id="page_control">
+					<ul class="pagination">
+
+					</ul>
+				</div>
+				<div style="clear: both;"></div>
+				<!--添加 修改  删除 按钮-->
+				<div class="useManage_button">
+					<div class="useManage_article_button" id="add_resourceInfo">添加</div>
+					<div class="useManage_article_button" id="alter_resourceInfo">修改</div>
+					<div class="useManage_article_button" id="delete_resourceInfo">删除</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="fullbg"></div>
+	<!--删除弹框-->
+	<div class="dialog_delete"
+		style="position: fixed; width: 300px; height: 150px; z-index: 9997; top: 215px; left: 546px; border-width: 30px 1.5px 1.5px; border-style: solid; border-color: rgb(27, 107, 184); border-radius: 5px; font-family: 宋体; background-color: rgb(255, 255, 255);">
+		<h1
+			style="font-size: 14px; font-family: 微软雅黑; color: #fff; margin-left: 10px; margin-top: -22px">提示</h1>
+		<p class="delete_dialog_p">确定删除该角色资源的信息吗？</p>
+		<div class="delete_dialog_div" id="ok">确定</div>
+		<div class="delete_dialog_div" id="no">取消</div>
+	</div>
+	<!--新增页面 弹框-->
+	<div class="dialog" id="dialog">
+		<div class="dialog_header">
+			<div class="square">
+				<img src="../../img/login_icon.png">
+			</div>
+			<span class="dialog_span">添加资源</span>
+			<div class="close cancel">
+				<img class="close_img" src="../../img/haderdel.png">
+			</div>
+		</div>
+		<div class="line"></div>
+		<div class="dialog_body">
+			<table class="dialog_table">
+				<tr>
+					<td><span class="star">*</span>资源名称：</td>
+					<td><div class="dialog_table_div">
+							<input type="text" maxlength="50" class="dialog_table_input"
+								id="resourceNameDig">
+						</div></td>
+
+
+
+
+					<td><span class="star">*</span>排序号：</td>
+					<td><div class="dialog_table_div">
+							<input type="text" maxlength="6" class="dialog_table_input"
+								id="sortIdDig">
+						</div></td>
+				</tr>
+				<tr>
+
+					<td><span class="star">*</span>资源编码：</td>
+					<td><div class="dialog_table_div">
+							<input maxlength="15" type="text" class="dialog_table_input"
+								id="resourceCodeDig">
+						</div></td>
+
+
+
+					<td><span class="star">*</span>资源类型：</td>
+					<td><div class="dialog_table_div">
+							<select class="dialog_table_select" id="resourceTypeDig">
+								<option value="1" selected="selected">菜单</option>
+								<option value="2">按钮</option>
+								<option value="3">链接</option>
+							</select>
+						</div></td>
+				</tr>
+				<tr>
+					<td><span class="star">*</span>启用标识：</td>
+					<td><div class="dialog_table_div">
+							<select class="dialog_table_select" id="enabledDig">
+								<option value="1" selected="selected">有效</option>
+								<option value="0">无效</option>
+							</select>
+						</div></td>
+
+				</tr>
+				<tr>
+					<td>资源路径：</td>
+					<td colspan="3">
+						<div class="path_div">
+							<input type="text" class="path_input" id="urlDig" />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>描述：</td>
+					<td colspan="3"><textarea class="dialog_textarea"
+							id="descriptionDig"></textarea></td>
+				</tr>
+			</table>
+			<div class="treediag">
+				<span style="float: left; width: 66px;">父资源：</span>
+				<div class="tree_dig">
+					<ul id="treeDemo1" class="ztree"></ul>
+				</div>
+			</div>
+		</div>
+		<div class="dialog_footer">
+			<div class="delete_dialog_div ok" id="add_submit">保存</div>
+			<div class="delete_dialog_div no cancel" id="cancle_submit">取消</div>
+		</div>
+	</div>
+	<!-- 修改页面弹框 -->
+	<div class="dialog" id="dialog2">
+		<div class="dialog_header">
+			<div class="square">
+				<img src="../../img/login_icon.png">
+			</div>
+			<span class="dialog_span">修改资源</span>
+			<div class="close cancel">
+				<img class="close_img" src="../../img/haderdel.png">
+			</div>
+		</div>
+		<div class="line"></div>
+		<div class="dialog_body">
+			<table class="dialog_table">
+				<tr>
+					<td><span class="star">*</span>资源名称：</td>
+					<td><div class="dialog_table_div">
+							<input type="text" maxlength="50" class="dialog_table_input"
+								id="resourceNameDig2">
+						</div></td>
+
+					<td><span class="star">*</span>排序号：</td>
+					<td><div class="dialog_table_div">
+							<input type="text" maxlength="6" class="dialog_table_input"
+								id="sortIdDig2">
+						</div></td>
+				</tr>
+				<tr>
+					<td><span class="star">*</span>资源编码：</td>
+					<td><div class="dialog_table_div">
+							<input type='hidden' id='resourceId' /><input type="text"
+								class="dialog_table_input" maxlength="15" id="resourceCodeDig2">
+						</div></td>
+
+					<td><span class="star">*</span>资源类型：</td>
+					<td><div class="dialog_table_div">
+							<select class="dialog_table_select" id="resourceTypeDig2">
+							</select>
+						</div></td>
+				</tr>
+				<tr>
+					<td><span class="star">*</span>启用标识：</td>
+					<td><div class="dialog_table_div">
+							<select class="dialog_table_select" id="enabledDig2">
+							</select>
+						</div></td>
+
+				</tr>
+				<tr>
+					<td>资源路径：</td>
+					<td colspan="3">
+						<div class="path_div">
+							<input type="text" class="path_input" id="urlDig2" />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>描述：</td>
+					<td colspan="3"><textarea class="dialog_textarea"
+							id="descriptionDig2"></textarea></td>
+				</tr>
+			</table>
+			<div class="treediag">
+				<span style="float: left; width: 66px;">父资源：</span>
+				<div class="tree_dig">
+					<ul id="treeDemo" class="ztree"></ul>
+				</div>
+			</div>
+		</div>
+		<div class="dialog_footer">
+			<div class="delete_dialog_div ok" id="add_submit2">保存</div>
+			<div class="delete_dialog_div no cancel" id="cancle_submit2">取消</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../../js/util/pagecontrol.js"></script>
+<script type="text/javascript"
+	src="../../js/util/ztree/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="../../js/manage/resource.js"></script>
+</html>

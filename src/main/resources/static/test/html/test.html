@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../js/jquery-1.11.2.js"></script>
+<script>
+	$(function() {
+		$.ajax({
+			async : false,
+			type : "post",
+			url : "../../swagger-resources/",
+			data : null,
+			dataType : 'json',
+			success : function(data) {
+				console.log(data);
+			},
+			error : function() {
+				alert("请求服务超时");
+			}
+		});
+	});
+</script>
+</head>
+<body>
+	<image src="../img/IMG_0143.JPG"></image>
+</body>
+</html>

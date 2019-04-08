@@ -1,0 +1,63 @@
+<!Doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="css/manageLogin.css" />
+<script type="text/javascript" src="js/util/jquery-1.11.2.js"></script>
+<script type="text/javascript" src="js/util/common.js"></script>
+<script type="text/javascript" src="js/manageLogin.js"></script>
+<script type="text/javascript" src="js/util/base.js"></script>
+<script type="text/javascript" src="js/util/json2.js"></script>
+<script type="text/javascript" src="js/util/ie8.js"></script>
+</head>
+<body class="bodyback">
+	<div class="container">
+		<div class="logindiv">
+			<div class="environment">
+				<img />
+			</div>
+			<div class="logincontext">
+				<form action="login" method="post"
+					onsubmit="return beforeSubmit()">
+					<div class="span2">
+						<img />
+					</div>
+					<!-- 账号输入部分-->
+					<div class="account_area">
+						<div class="login_li_center">
+							<input type="text" id="manageName" name="manageName"
+								placeholder="用户名" class="account_input" maxlength="20">
+						</div>
+					</div>
+					<div>
+						<div class="login_li_center">
+							<input type="password" id="managePassword" name="managePassword"
+								placeholder="密码" class="account_input" />
+						</div>
+					</div>
+					<!-- 登录按钮-->
+					<input id="login" class="btn_login" type="submit" value="登录" />
+					<!-- 			<div id="login" class="btn_login">登录</div> -->
+
+					<div class="span3"></div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	$(function() {
+		var hostname = window.location.hostname;
+		if (hostname.indexOf("112.74.240.30") >= 0) {
+			$(".environment img").attr("src", "img/environment_SIT.png");
+		} else if (hostname.indexOf("192.168.176.14") >= 0
+				|| hostname.indexOf("dh-uat.by-fx.com") >= 0) {
+			$(".environment img").attr("src", "img/environment_UAT.png");
+		} else {
+			$(".environment img").attr("src", "img/environment_Pro.png");
+		}
+
+	});
+</script>
+</html>

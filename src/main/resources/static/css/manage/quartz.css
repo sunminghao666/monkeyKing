@@ -1,0 +1,274 @@
+@charset "utf-8";
+body{
+	padding: 0;
+	margin: 0;
+}
+.common_width{
+	width:100%;
+	background-color: #fff;
+}
+.orderpage{
+	width: 817px;
+    font-family: "宋体";
+    font-size: 12px;
+    color: #444444;
+}
+/*中间部分*/
+.content{
+	width: 100%;
+}
+/*配置信息查询条件 */
+.content-menu{
+	width: 100%;
+	padding-bottom:15px;
+}
+.content-menu-table{
+	width: 88%;
+	margin: 0 auto;
+	margin-top: 14px;
+	font-family: "宋体";
+	font-size: 12px;
+	color: #444444;
+}
+.content-menu-table tr {
+	height: 40px;
+}
+.content-menu-table tr td input{
+	width: 168px;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 5px;
+    margin-left: 10px;
+    color: #444444;
+    background-color: #fff;
+    border: 1px solid #DEDEDE;
+    border-radius:3px;
+}
+.content-menu-table tr .Wdate{
+	width: 76px;
+	height: 30px;
+	line-height:30px;
+	color: #444444;
+	padding-left: 5px;
+}
+.content-menu-table tr td select{
+	width: 168px;
+    height: 30px;
+    line-height: 30px;
+    padding: 5px 5px;
+    margin-left: 10px;
+    color: #444444;
+    background-color: #fff;
+    border: 1px solid #DEDEDE;
+    border-radius:3px;
+}
+/*查询结果及条件*/
+.useManage_right {
+    width: 100%;
+    font-family: "宋体";
+    font-size: 12px;
+    color: #444444;
+}
+.query_criteria {
+    width: 94%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-top: 10px;
+    border-bottom: 1px #ccc solid;
+    font-size: 16px;
+    font-weight: bold;
+}
+/*查询按钮*/
+.querybtn{
+	margin: 0 auto;
+	margin-top: 20px;
+	width: 10%;
+	height: 30px;
+	line-height: 28px;
+	text-align: center;
+	color: #1B6BB8;
+	font-size: 14px;
+	cursor: pointer;
+	border-radius: 3px;
+	border: 1px solid #1B6BB8;
+} 
+.carorder_query{
+	margin: 0 auto;
+	margin-top: 20px;
+	width: 10%;
+	height: 30px;
+	line-height: 28px;
+	text-align: center;
+	color: #1B6BB8;
+	font-size: 14px;
+	cursor: pointer;
+	border-radius: 3px;
+	border: 1px solid #1B6BB8;
+}
+.carorder_query:hover{
+	color:#fff;
+	background-color: #1B6BB8;
+}
+.querybtn1{
+	width: 50px;
+    height: 25px;
+    font-size: 12px;
+    line-height: 25px;
+    text-align: center;
+	color: #1B6BB8;
+	border: 1px solid #1B6BB8;
+    border-radius: 3px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+.querybtn1:hover{
+	color:#fff;
+	background-color: #1B6BB8;
+}
+.querybtn:hover{
+	color:#fff;
+	background-color: #1B6BB8;
+}
+/*配置信息查询条件*/
+.content-order{
+	width:90%;
+	color: #444444;
+	font-size: 12px;
+	font-family: "宋体";
+	margin:0 auto;
+	margin-top: 10px;
+}
+/*配置信息头部*/
+.content-order-title{
+	width: 100%;
+	height: 38px;
+	border-top: 1px solid #EEEEEE;
+	border-left: 1px solid #EEEEEE;
+	background-color: #F6F6F6;
+}
+.content-order-title th{
+	height:38px;
+	border-right: 1px solid #EEEEEE;
+	text-align: center;
+}
+/*配置信息显示部分*/
+.order-content-table{
+	width: 100%;
+	table-layout: fixed;
+}
+.order-content-table tr{
+	border: 1px solid #EEEEEE;
+	background-color: #FFFFFF;
+}
+.order-content-table tr td{
+	height: 38px;
+	text-align: center;
+	border-right: 1px solid #EEEEEE;
+}
+.order-content-table td a{
+	color: #444444;
+	font-size: 12px;
+	cursor: pointer;
+	text-decoration: underline;
+	font-weight: 600;
+}
+.order-content-table td a:hover{
+	color: #CA0101;
+	text-decoration: underline;
+	cursor: pointer;
+	font-weight: 600;
+}
+.order-content-table tr .productname{
+	padding-left: 3px;
+    white-space:nowrap;/*//禁止换行*/
+}
+/*无数据时*/
+.noproduct{
+	width: 40%;
+	margin: 0 auto;
+	padding-bottom: 15px;
+	padding-top: 10px;
+}
+.noproduct div{
+	width: 20%;
+}
+/*分页的样式*/
+#page_control{
+	font-family: "宋体";
+	font-size: 14px;
+	float:right;
+}
+.pagination {
+  display: inline-block;
+  padding-left: 0;
+  margin: 20px 20px;
+  border-radius: 4px;
+}
+#count_content{
+	position: relative; 
+	left:10px;
+	top: 10px;
+}
+.pagination li {
+  display: inline;
+}
+.pagination li a.active{
+	background-color: #1B6BB8;
+	color:#fff;
+}
+.pagination li a{
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.428571429;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+.rema{
+	display: none;
+    width: 120px;
+    color: #000;
+    padding: 2px;
+    font-size: 12px;
+    border: 1px #ccc solid;
+    border-radius: 5px;
+    position: absolute;
+    left: 20%;
+    word-wrap: break-word;
+    z-index: 100;
+    background-color: #FFFFFF
+    
+}
+.modal-dialog{
+	width: 700px;
+	margin:100px auto;
+}
+.modal-footer{
+	padding:10px 20px;
+}
+.mdtab{
+	width: 100%;
+}
+.mdtab tr th{
+	text-align: center;
+	border-top: 1px solid #EEEEEE;
+	border-left: 1px solid #EEEEEE;
+	border-right: 1px solid #EEEEEE;
+	height: 28px;
+	background: #F6F6F6;
+}
+.mdtab tr td{
+	text-align: center;
+	border: 1px solid #EEEEEE;
+	height: 28px;
+}
+.mdp{
+	width: 100%;
+	display: none;
+	font-size: 14px;
+	padding: 10px;
+}

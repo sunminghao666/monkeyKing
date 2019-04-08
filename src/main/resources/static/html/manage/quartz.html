@@ -1,0 +1,172 @@
+<!Doctype html>
+<html>
+<head>
+<title>自动化管理</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<meta http-equiv="pragma" content="no-cache,must-revalidate">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="stylesheet" type="text/css"
+	href="../../component/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../../css/common.css" />
+<script src="../../js/util/jquery-1.11.2.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="../../component/bootstrap/bootstrap.min.js"
+	type="text/javascript" charset="utf-8"></script>
+<script src="../../js/util/base.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="../../js/util/back.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="../../js/util/ie8.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="../../js/util/common.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="../../js/util/json2.js" type="text/javascript"
+	charset="utf-8"></script>
+<script type="text/javascript" src="../../js/util/titPackage.js"
+	charset="utf-8"></script>
+<script type="text/javascript"
+	src="../../component/common/dictionary.js" charset="utf-8"></script>
+<link rel="stylesheet" href="../../css/manage/resourceManage.css" />
+<link rel="stylesheet" href="../../component/ztree/zTreeStyle.css" />
+<script type="text/javascript" src="../../js/util/pagecontrol.js"></script>
+<script type="text/javascript"
+	src="../../js/util/ztree/jquery.ztree.all-3.5.min.js"></script>
+<link rel="stylesheet" href="../../css/manage/quartz.css"" />
+<script type="text/javascript" src="../../js/manage/quartz.js">
+	
+</script>
+</head>
+<body>
+	<div class="common_subpage_width common_width">
+		<div class="pageinfo">
+			<!--定义产品数量-->
+			<input type="hidden" id="count" value="0" />
+			<!--定义每页数量-->
+			<input type="hidden" id="itemnum" value="10" />
+			<!--定义初始化页码-->
+			<input type="hidden" id="pagenum" value="1" />
+		</div>
+		<div class="useManage_right">
+			<div class="query_criteria">
+				<img src="../../img/login_icon.png"> <span>查询条件</span>
+			</div>
+		</div>
+		<div class="content">
+			<!-- 配置信息查询条件 -->
+			<div class="content-menu">
+				<table class="content-menu-table">
+					<tr>
+						<td width="3%" align="left">任务分类</td>
+						<td width="5%" align="left"><select id="jobtype"
+							onchange="show_sub(this.options[this.options.selectedIndex].value)"></select>
+						</td>
+
+						<td width="4%" align="left">有效性</td>
+						<td width="5%"><select id="jobStatus">
+								<option value="">全部</option>
+								<option value="1">有效</option>
+								<option value="0">无效</option>
+						</select></td>
+					</tr>
+					<tr>
+						<td width="3%" align="left">操作类型</td>
+						<td width="5%" align="left"><select id="jobMethod"></select>
+						</td>
+
+
+					</tr>
+				</table>
+				<div
+					style="width: 45%; height: 35px; margin-left: auto; margin-right: auto">
+					<div class="querybtn" id="searchBtn"
+						style="float: left; width: 120px">查询</div>
+					<div class="querybtn" id="addSubmit" onclick="addSubmit()"
+						style="float: right; width: 120px">添加</div>
+					<div style="clear: both"></div>
+				</div>
+			</div>
+			<div class="useManage_right">
+				<div class="query_criteria">
+					<img src="../../img/login_icon.png"> <span>查询结果</span>
+				</div>
+			</div>
+			<!-- 配置信息查询结果 -->
+			<div class="content-order" style="overflow-x: scroll;">
+				<div style="width: 100%">
+					<table class="content-order-title" style="table-layout: fixed;">
+						<thead>
+							<tr>
+
+								<th width="2%">序号</th>
+								<th width="10%">批跑任务号</th>
+								<th width="10%">时间频率</th>
+								<th width="4%">运行状态</th>
+								<th width="4%">任务状态</th>
+								<th width="8%">操作类型</th>
+								<th width="8%">创建时间</th>
+								<th width="8%">有效起期</th>
+								<th width="8%">有效止期</th>
+								<th width="4%">阀值</th>
+								<th width="8%">批跑时间</th>
+
+								<th width="8%">操作</th>
+							</tr>
+						</thead>
+					</table>
+					<table class="order-content-table" id="carorder-order"></table>
+				</div>
+				<div class="noproduct" align="center" style="display: none;">
+					<div>
+						<img src="../images/magnifier.png" alt="" class="noproduct"
+							style="width: 20px" />
+					</div>
+					对不起，没有查询到您需要的批跑信息!
+				</div>
+			</div>
+			<!-- 分页 -->
+			<div id="page_control">
+				<ul class="pagination"></ul>
+			</div>
+		</div>
+		<a title="返回顶部" href="#gotop" id="gotop"></a>
+		<!--弹框-->
+		<div class="modal fade modshw" tabindex="-1" role="dialog"
+			aria-labelledby="gridSystemModalLabel">
+			<div class="modal-dialog " role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="gridSystemModalLabel">批跑日志</h4>
+					</div>
+					<div class="modal-body">
+						<table class="mdtab">
+							<tr>
+								<th width="25%">编号</th>
+								<th width="15%">执行结果</th>
+								<th width="25%">开始时间</th>
+								<th width="25%">结束时间</th>
+								<th width="10%">消耗时间</th>
+							</tr>
+						</table>
+						<table class="mdtab mbbdd">
+						</table>
+						<p class="mdp">暂无数据</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary btn-sm"
+							data-dismiss="modal">关闭</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

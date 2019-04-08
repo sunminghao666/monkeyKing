@@ -1,0 +1,76 @@
+<!Doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache, must-revalidate">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="Wed, 26 Feb 1997 08:21:57GMT">
+<link rel="stylesheet" type="text/css"
+	href="component/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+<script src="js/util/jquery-1.11.2.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="component/bootstrap/bootstrap.min.js"
+	type="text/javascript" charset="utf-8"></script>
+<script src="js/util/base.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/util/back.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/util/ie8.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/util/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/util/json2.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="js/util/titPackage.js"
+	charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="css/manageIndex.css" />
+<link rel="stylesheet" type="text/css" href="css/scrollBar.css" />
+<script type="text/javascript" src="js/manageIndex.js"></script>
+<script type="text/javascript" src="js/scrollBar.js"></script>
+</head>
+<body>
+	<div id="header">
+		<div class="container">
+			<div id="logo" onclick="switchToBlank()">
+				<img />
+			</div>
+			<div id="back">
+				<div style="cursor: pointer;" onclick="logout()">
+					<img src="img/safety_exit.png" alt="退出" /> <span id="out">退&nbsp;&nbsp;出</span>
+				</div>
+			</div>
+			<div id="uppwd">
+				<div style="cursor: pointer;" onclick="uppwd()">
+					<img src="img/change_password.png" alt="修改密码" /> <span id="out">修改密码</span>
+				</div>
+			</div>
+			<div id="user" style="display: none;">
+				<div style="cursor: pointer;" class="out">
+					<span id="out">登录用户： <input type="text" id="userName"
+						value="${user.getUsername()}" readonly></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="clear: both;"></div>
+	<div id="comtentior" class="common_subpage_width comtentior">
+		<div id="left" class="scrollBox" th:utext="${menuTree}"></div>
+		<div class="nvright">
+			<div class="btn btn-link pull-left nvpre">
+				<span class="glyphicon glyphicon-backward"></span>
+			</div>
+			<div class="nvConter">
+				<ul id="nav" class="nav nav-pills"></ul>
+			</div>
+			<div class="btn btn-link pull-right nvnext">
+				<span class="glyphicon glyphicon-forward"></span>
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+		<div id="right">
+			<iframe id="showPage" name="showPage" frameborder="0"
+				style="min-width: 100%; border: none; overflow-x: hidden;"
+				height="100%"></iframe>
+		</div>
+		<div style="clear: both;"></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.monkey.auth.manage.dao.ResourcesMapper">
+	<resultMap id="BaseResultMap" type="com.monkey.auth.manage.pojo.Resources">
+		<id column="ID" property="id" jdbcType="BIGINT" />
+		<result column="RESOURCE_CODE" property="resourceCode"
+			jdbcType="VARCHAR" />
+		<result column="RESOURCE_TYPE" property="resourceType"
+			jdbcType="VARCHAR" />
+		<result column="RESOURCE_NAME" property="resourceName"
+			jdbcType="VARCHAR" />
+		<result column="URL" property="url" jdbcType="VARCHAR" />
+		<result column="ENABLED" property="enabled" jdbcType="VARCHAR" />
+		<result column="SORT_ORDER" property="sortOrder" jdbcType="INTEGER" />
+		<result column="INSERT_TIME" property="insertTime" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="INSERT_USER" property="insertUser" jdbcType="VARCHAR" />
+		<result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+		<result column="PARENT_ID" property="parentId" jdbcType="VARCHAR" />
+		<result column="INDEX_CODE" property="indexCode" jdbcType="VARCHAR" />
+		<result column="ENUMVAL" property="enumval" jdbcType="VARCHAR" />
+		<result column="TARGET" property="target" jdbcType="VARCHAR" />
+		<result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		ID, RESOURCE_CODE, RESOURCE_TYPE, RESOURCE_NAME, URL,
+		ENABLED,
+		SORT_ORDER, INSERT_TIME,
+		UPDATE_TIME, INSERT_USER, UPDATE_USER,
+		PARENT_ID, INDEX_CODE, ENUMVAL, TARGET,
+		DESCRIPTION
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.monkey.auth.manage.pojo.ResourcesExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		'true' as QUERYID,
+		<include refid="Base_Column_List" />
+		from pwb_resources
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from pwb_resources
+		where ID = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		pwb_resources
+		where ID = #{id,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.monkey.auth.manage.pojo.ResourcesExample">
+		delete from pwb_resources
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.monkey.auth.manage.pojo.Resources">
+		insert into pwb_resources (ID,
+		RESOURCE_CODE, RESOURCE_TYPE,
+		RESOURCE_NAME, URL, ENABLED,
+		SORT_ORDER,
+		INSERT_TIME, UPDATE_TIME,
+		INSERT_USER, UPDATE_USER, PARENT_ID,
+		INDEX_CODE, ENUMVAL, TARGET,
+		DESCRIPTION)
+		values (#{id,jdbcType=BIGINT},
+		#{resourceCode,jdbcType=VARCHAR},
+		#{resourceType,jdbcType=VARCHAR},
+		#{resourceName,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
+		#{enabled,jdbcType=VARCHAR},
+		#{sortOrder,jdbcType=INTEGER},
+		#{insertTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP},
+		#{insertUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR},
+		#{parentId,jdbcType=VARCHAR},
+		#{indexCode,jdbcType=VARCHAR},
+		#{enumval,jdbcType=VARCHAR},
+		#{target,jdbcType=VARCHAR},
+		#{description,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.monkey.auth.manage.pojo.Resources">
+		insert into pwb_resources
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="resourceCode != null">
+				RESOURCE_CODE,
+			</if>
+			<if test="resourceType != null">
+				RESOURCE_TYPE,
+			</if>
+			<if test="resourceName != null">
+				RESOURCE_NAME,
+			</if>
+			<if test="url != null">
+				URL,
+			</if>
+			<if test="enabled != null">
+				ENABLED,
+			</if>
+			<if test="sortOrder != null">
+				SORT_ORDER,
+			</if>
+			<if test="insertTime != null">
+				INSERT_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="insertUser != null">
+				INSERT_USER,
+			</if>
+			<if test="updateUser != null">
+				UPDATE_USER,
+			</if>
+			<if test="parentId != null">
+				PARENT_ID,
+			</if>
+			<if test="indexCode != null">
+				INDEX_CODE,
+			</if>
+			<if test="enumval != null">
+				ENUMVAL,
+			</if>
+			<if test="target != null">
+				TARGET,
+			</if>
+			<if test="description != null">
+				DESCRIPTION,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="resourceCode != null">
+				#{resourceCode,jdbcType=VARCHAR},
+			</if>
+			<if test="resourceType != null">
+				#{resourceType,jdbcType=VARCHAR},
+			</if>
+			<if test="resourceName != null">
+				#{resourceName,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="enabled != null">
+				#{enabled,jdbcType=VARCHAR},
+			</if>
+			<if test="sortOrder != null">
+				#{sortOrder,jdbcType=INTEGER},
+			</if>
+			<if test="insertTime != null">
+				#{insertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="insertUser != null">
+				#{insertUser,jdbcType=VARCHAR},
+			</if>
+			<if test="updateUser != null">
+				#{updateUser,jdbcType=VARCHAR},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=VARCHAR},
+			</if>
+			<if test="indexCode != null">
+				#{indexCode,jdbcType=VARCHAR},
+			</if>
+			<if test="enumval != null">
+				#{enumval,jdbcType=VARCHAR},
+			</if>
+			<if test="target != null">
+				#{target,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.monkey.auth.manage.pojo.ResourcesExample"
+		resultType="java.lang.Integer">
+		select count(*) from pwb_resources
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update pwb_resources
+		<set>
+			<if test="record.id != null">
+				ID = #{record.id,jdbcType=BIGINT},
+			</if>
+			<if test="record.resourceCode != null">
+				RESOURCE_CODE = #{record.resourceCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.resourceType != null">
+				RESOURCE_TYPE = #{record.resourceType,jdbcType=VARCHAR},
+			</if>
+			<if test="record.resourceName != null">
+				RESOURCE_NAME = #{record.resourceName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.url != null">
+				URL = #{record.url,jdbcType=VARCHAR},
+			</if>
+			<if test="record.enabled != null">
+				ENABLED = #{record.enabled,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sortOrder != null">
+				SORT_ORDER = #{record.sortOrder,jdbcType=INTEGER},
+			</if>
+			<if test="record.insertTime != null">
+				INSERT_TIME = #{record.insertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updateTime != null">
+				UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.insertUser != null">
+				INSERT_USER = #{record.insertUser,jdbcType=VARCHAR},
+			</if>
+			<if test="record.updateUser != null">
+				UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+			</if>
+			<if test="record.parentId != null">
+				PARENT_ID = #{record.parentId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.indexCode != null">
+				INDEX_CODE = #{record.indexCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.enumval != null">
+				ENUMVAL = #{record.enumval,jdbcType=VARCHAR},
+			</if>
+			<if test="record.target != null">
+				TARGET = #{record.target,jdbcType=VARCHAR},
+			</if>
+			<if test="record.description != null">
+				DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update pwb_resources
+		set ID = #{record.id,jdbcType=BIGINT},
+		RESOURCE_CODE = #{record.resourceCode,jdbcType=VARCHAR},
+		RESOURCE_TYPE
+		= #{record.resourceType,jdbcType=VARCHAR},
+		RESOURCE_NAME =
+		#{record.resourceName,jdbcType=VARCHAR},
+		URL =
+		#{record.url,jdbcType=VARCHAR},
+		ENABLED =
+		#{record.enabled,jdbcType=VARCHAR},
+		SORT_ORDER =
+		#{record.sortOrder,jdbcType=INTEGER},
+		INSERT_TIME =
+		#{record.insertTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME =
+		#{record.updateTime,jdbcType=TIMESTAMP},
+		INSERT_USER =
+		#{record.insertUser,jdbcType=VARCHAR},
+		UPDATE_USER =
+		#{record.updateUser,jdbcType=VARCHAR},
+		PARENT_ID =
+		#{record.parentId,jdbcType=VARCHAR},
+		INDEX_CODE =
+		#{record.indexCode,jdbcType=VARCHAR},
+		ENUMVAL =
+		#{record.enumval,jdbcType=VARCHAR},
+		TARGET =
+		#{record.target,jdbcType=VARCHAR},
+		DESCRIPTION =
+		#{record.description,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.monkey.auth.manage.pojo.Resources">
+		update pwb_resources
+		<set>
+			<if test="resourceCode != null">
+				RESOURCE_CODE = #{resourceCode,jdbcType=VARCHAR},
+			</if>
+			<if test="resourceType != null">
+				RESOURCE_TYPE = #{resourceType,jdbcType=VARCHAR},
+			</if>
+			<if test="resourceName != null">
+				RESOURCE_NAME = #{resourceName,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null">
+				URL = #{url,jdbcType=VARCHAR},
+			</if>
+			<if test="enabled != null">
+				ENABLED = #{enabled,jdbcType=VARCHAR},
+			</if>
+			<if test="sortOrder != null">
+				SORT_ORDER = #{sortOrder,jdbcType=INTEGER},
+			</if>
+			<if test="insertTime != null">
+				INSERT_TIME = #{insertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="insertUser != null">
+				INSERT_USER = #{insertUser,jdbcType=VARCHAR},
+			</if>
+			<if test="updateUser != null">
+				UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+			</if>
+			<if test="parentId != null">
+				PARENT_ID = #{parentId,jdbcType=VARCHAR},
+			</if>
+			<if test="indexCode != null">
+				INDEX_CODE = #{indexCode,jdbcType=VARCHAR},
+			</if>
+			<if test="enumval != null">
+				ENUMVAL = #{enumval,jdbcType=VARCHAR},
+			</if>
+			<if test="target != null">
+				TARGET = #{target,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				DESCRIPTION = #{description,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.monkey.auth.manage.pojo.Resources">
+		update
+		pwb_resources
+		set RESOURCE_CODE = #{resourceCode,jdbcType=VARCHAR},
+		RESOURCE_TYPE = #{resourceType,jdbcType=VARCHAR},
+		RESOURCE_NAME =
+		#{resourceName,jdbcType=VARCHAR},
+		URL = #{url,jdbcType=VARCHAR},
+		ENABLED = #{enabled,jdbcType=VARCHAR},
+		SORT_ORDER =
+		#{sortOrder,jdbcType=INTEGER},
+		INSERT_TIME =
+		#{insertTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME =
+		#{updateTime,jdbcType=TIMESTAMP},
+		INSERT_USER =
+		#{insertUser,jdbcType=VARCHAR},
+		UPDATE_USER =
+		#{updateUser,jdbcType=VARCHAR},
+		PARENT_ID =
+		#{parentId,jdbcType=VARCHAR},
+		INDEX_CODE =
+		#{indexCode,jdbcType=VARCHAR},
+		ENUMVAL = #{enumval,jdbcType=VARCHAR},
+		TARGET = #{target,jdbcType=VARCHAR},
+		DESCRIPTION =
+		#{description,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=BIGINT}
+	</update>
+	<select id="queryByPage" resultMap="BaseResultMap">
+		select ID, RESOURCE_CODE, RESOURCE_TYPE,
+		RESOURCE_NAME,URL, ENABLED,
+		SORT_ORDER, INSERT_TIME, UPDATE_TIME,
+		INSERT_USER, UPDATE_USER,
+		PARENT_ID,
+		INDEX_CODE, ENUMVAL, TARGET,DESCRIPTION from pwb_resources
+		where 1 = 1
+		<if test="resourceName != null and resourceName != '' ">
+			and RESOURCE_NAME like CONCAT('%',#{resourceName},'%')
+		</if>
+		<if test="resourceCode != null and resourceCode != '' ">
+			and RESOURCE_CODE like CONCAT('%',#{resourceCode},'%')
+		</if>
+		order by SORT_ORDER LIMIT ${startIndex},${size};
+	</select>
+	<select id="countResource" resultType="java.lang.Integer">
+		select count(id) from pwb_resources where 1=1
+		<if test="resourceName != null and resourceName != '' ">
+			and RESOURCE_NAME like CONCAT('%',#{resourceName},'%')
+		</if>
+		<if test="resourceCode != null and resourceCode != '' ">
+			and RESOURCE_CODE like CONCAT('%',#{resourceCode},'%')
+		</if>
+	</select>
+	<select id="findResourcesByCondition" parameterType="com.monkey.auth.manage.pojo.Resources"
+		resultMap="BaseResultMap">
+		select * from pwb_resources where 1 =1 and ENABLED=1
+		<if test="resourceCode != null and resourceCode != '' ">
+			and RESOURCE_CODE =#{resourceCode,jdbcType=VARCHAR}
+		</if>
+		<if test="resourceName != null and resourceName != '' ">
+			or RESOURCE_NAME = #{resourceName,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<select id="findResourcesByCondition2" parameterType="com.monkey.auth.manage.pojo.Resources"
+		resultMap="BaseResultMap">
+		select * from pwb_resources where 1 =1 and ENABLED=1
+		<if test="resourceCode != null and resourceCode != '' ">
+			and RESOURCE_CODE !=#{resourceCode,jdbcType=VARCHAR}
+		</if>
+		<if test="resourceName != null and resourceName != '' ">
+			or RESOURCE_NAME != #{resourceName,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<select id="findCurrUserAuthRes" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		res.id,res.RESOURCE_CODE,res.RESOURCE_NAME,res.PARENT_ID,res.URL,res.RESOURCE_TYPE
+		from
+		pwb_user u , pwb_user_role ur ,pwb_role r , pwb_role_resource rr
+		,pwb_resources res
+		where u.ID=ur.USER_CODE and ur.ROLE_CODE=r.ID and
+		r.ID=rr.ROLE_CODE and rr.RESOURCE_CODE=res.ID
+		and u.VALIDSTATUS=1 and
+		res.ENABLED=1 and r.ENABLED=1 and
+		u.id=#{id,jdbcType=BIGINT}
+		GROUP BY
+		res.ID,res.RESOURCE_NAME,res.RESOURCE_CODE,res.PARENT_ID,res.URL
+		ORDER
+		BY SORT_ORDER ASC
+	</select>
+	<select id="findCurrRes" resultMap="BaseResultMap">
+		select
+		res.id,res.RESOURCE_CODE,res.RESOURCE_NAME,res.PARENT_ID,res.URL,res.RESOURCE_TYPE
+		from
+		pwb_user u , pwb_user_role ur ,pwb_role r , pwb_role_resource rr
+		,pwb_resources res
+		where u.ID=ur.USER_CODE and ur.ROLE_CODE=r.ID and
+		r.ID=rr.ROLE_CODE and rr.RESOURCE_CODE=res.ID
+		and u.VALIDSTATUS=1 and
+		res.ENABLED=1 and r.ENABLED=1 and
+		u.USERCODE = #{userName}
+		GROUP BY
+		res.ID,res.RESOURCE_NAME,res.RESOURCE_CODE,res.PARENT_ID,res.URL
+		ORDER
+		BY SORT_ORDER ASC
+	</select>
+</mapper>

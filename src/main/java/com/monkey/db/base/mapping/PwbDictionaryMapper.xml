@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.monkey.db.base.dao.PwbDictionaryMapper">
+	<resultMap id="BaseResultMap" type="com.monkey.db.base.pojo.PwbDictionary">
+		<id column="ID" property="id" jdbcType="BIGINT" />
+		<result column="DIC_TYPE" property="dicType" jdbcType="VARCHAR" />
+		<result column="DIC_TYPE_LABEL" property="dicTypeLabel"
+			jdbcType="VARCHAR" />
+		<result column="DIC_CODE" property="dicCode" jdbcType="VARCHAR" />
+		<result column="DIC_VALUE" property="dicValue" jdbcType="VARCHAR" />
+		<result column="DIC_EXPLAIN" property="dicExplain" jdbcType="VARCHAR" />
+		<result column="DIC_STATUS" property="dicStatus" jdbcType="VARCHAR" />
+		<result column="DIC_ORDER" property="dicOrder" jdbcType="INTEGER" />
+		<result column="DIC_CHANNEL" property="dicChannel" jdbcType="VARCHAR" />
+		<result column="INSERTCODE" property="insertcode" jdbcType="VARCHAR" />
+		<result column="INSERTTIME" property="inserttime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="SYSTEM_CHANNEL" property="systemChannel"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		ID, DIC_TYPE, DIC_TYPE_LABEL, DIC_CODE, DIC_VALUE,
+		DIC_EXPLAIN,
+		DIC_STATUS, DIC_ORDER,
+		DIC_CHANNEL, INSERTCODE, INSERTTIME,
+		REMARK, SYSTEM_CHANNEL
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.monkey.db.base.pojo.PwbDictionaryExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		'true' as QUERYID,
+		<include refid="Base_Column_List" />
+		from pwb_dictionary
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from pwb_dictionary
+		where ID = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		pwb_dictionary
+		where ID = #{id,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.monkey.db.base.pojo.PwbDictionaryExample">
+		delete from pwb_dictionary
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.monkey.db.base.pojo.PwbDictionary">
+		insert into pwb_dictionary
+		(ID, DIC_TYPE, DIC_TYPE_LABEL,
+		DIC_CODE, DIC_VALUE, DIC_EXPLAIN,
+		DIC_STATUS, DIC_ORDER, DIC_CHANNEL,
+		INSERTCODE, INSERTTIME, REMARK,
+		SYSTEM_CHANNEL)
+		values (#{id,jdbcType=BIGINT},
+		#{dicType,jdbcType=VARCHAR},
+		#{dicTypeLabel,jdbcType=VARCHAR},
+		#{dicCode,jdbcType=VARCHAR}, #{dicValue,jdbcType=VARCHAR},
+		#{dicExplain,jdbcType=VARCHAR},
+		#{dicStatus,jdbcType=VARCHAR},
+		#{dicOrder,jdbcType=INTEGER},
+		#{dicChannel,jdbcType=VARCHAR},
+		#{insertcode,jdbcType=VARCHAR}, #{inserttime,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR},
+		#{systemChannel,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.monkey.db.base.pojo.PwbDictionary">
+		insert into pwb_dictionary
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="dicType != null">
+				DIC_TYPE,
+			</if>
+			<if test="dicTypeLabel != null">
+				DIC_TYPE_LABEL,
+			</if>
+			<if test="dicCode != null">
+				DIC_CODE,
+			</if>
+			<if test="dicValue != null">
+				DIC_VALUE,
+			</if>
+			<if test="dicExplain != null">
+				DIC_EXPLAIN,
+			</if>
+			<if test="dicStatus != null">
+				DIC_STATUS,
+			</if>
+			<if test="dicOrder != null">
+				DIC_ORDER,
+			</if>
+			<if test="dicChannel != null">
+				DIC_CHANNEL,
+			</if>
+			<if test="insertcode != null">
+				INSERTCODE,
+			</if>
+			<if test="inserttime != null">
+				INSERTTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="systemChannel != null">
+				SYSTEM_CHANNEL,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="dicType != null">
+				#{dicType,jdbcType=VARCHAR},
+			</if>
+			<if test="dicTypeLabel != null">
+				#{dicTypeLabel,jdbcType=VARCHAR},
+			</if>
+			<if test="dicCode != null">
+				#{dicCode,jdbcType=VARCHAR},
+			</if>
+			<if test="dicValue != null">
+				#{dicValue,jdbcType=VARCHAR},
+			</if>
+			<if test="dicExplain != null">
+				#{dicExplain,jdbcType=VARCHAR},
+			</if>
+			<if test="dicStatus != null">
+				#{dicStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="dicOrder != null">
+				#{dicOrder,jdbcType=INTEGER},
+			</if>
+			<if test="dicChannel != null">
+				#{dicChannel,jdbcType=VARCHAR},
+			</if>
+			<if test="insertcode != null">
+				#{insertcode,jdbcType=VARCHAR},
+			</if>
+			<if test="inserttime != null">
+				#{inserttime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="systemChannel != null">
+				#{systemChannel,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.monkey.db.base.pojo.PwbDictionaryExample"
+		resultType="java.lang.Integer">
+		select count(*) from pwb_dictionary
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update pwb_dictionary
+		<set>
+			<if test="record.id != null">
+				ID = #{record.id,jdbcType=BIGINT},
+			</if>
+			<if test="record.dicType != null">
+				DIC_TYPE = #{record.dicType,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dicTypeLabel != null">
+				DIC_TYPE_LABEL = #{record.dicTypeLabel,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dicCode != null">
+				DIC_CODE = #{record.dicCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dicValue != null">
+				DIC_VALUE = #{record.dicValue,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dicExplain != null">
+				DIC_EXPLAIN = #{record.dicExplain,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dicStatus != null">
+				DIC_STATUS = #{record.dicStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dicOrder != null">
+				DIC_ORDER = #{record.dicOrder,jdbcType=INTEGER},
+			</if>
+			<if test="record.dicChannel != null">
+				DIC_CHANNEL = #{record.dicChannel,jdbcType=VARCHAR},
+			</if>
+			<if test="record.insertcode != null">
+				INSERTCODE = #{record.insertcode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.inserttime != null">
+				INSERTTIME = #{record.inserttime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.remark != null">
+				REMARK = #{record.remark,jdbcType=VARCHAR},
+			</if>
+			<if test="record.systemChannel != null">
+				SYSTEM_CHANNEL =
+				#{record.systemChannel,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update pwb_dictionary
+		set ID = #{record.id,jdbcType=BIGINT},
+		DIC_TYPE =
+		#{record.dicType,jdbcType=VARCHAR},
+		DIC_TYPE_LABEL =
+		#{record.dicTypeLabel,jdbcType=VARCHAR},
+		DIC_CODE =
+		#{record.dicCode,jdbcType=VARCHAR},
+		DIC_VALUE =
+		#{record.dicValue,jdbcType=VARCHAR},
+		DIC_EXPLAIN =
+		#{record.dicExplain,jdbcType=VARCHAR},
+		DIC_STATUS =
+		#{record.dicStatus,jdbcType=VARCHAR},
+		DIC_ORDER =
+		#{record.dicOrder,jdbcType=INTEGER},
+		DIC_CHANNEL =
+		#{record.dicChannel,jdbcType=VARCHAR},
+		INSERTCODE =
+		#{record.insertcode,jdbcType=VARCHAR},
+		INSERTTIME =
+		#{record.inserttime,jdbcType=TIMESTAMP},
+		REMARK =
+		#{record.remark,jdbcType=VARCHAR},
+		SYSTEM_CHANNEL =
+		#{record.systemChannel,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.monkey.db.base.pojo.PwbDictionary">
+		update pwb_dictionary
+		<set>
+			<if test="dicType != null">
+				DIC_TYPE = #{dicType,jdbcType=VARCHAR},
+			</if>
+			<if test="dicTypeLabel != null">
+				DIC_TYPE_LABEL = #{dicTypeLabel,jdbcType=VARCHAR},
+			</if>
+			<if test="dicCode != null">
+				DIC_CODE = #{dicCode,jdbcType=VARCHAR},
+			</if>
+			<if test="dicValue != null">
+				DIC_VALUE = #{dicValue,jdbcType=VARCHAR},
+			</if>
+			<if test="dicExplain != null">
+				DIC_EXPLAIN = #{dicExplain,jdbcType=VARCHAR},
+			</if>
+			<if test="dicStatus != null">
+				DIC_STATUS = #{dicStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="dicOrder != null">
+				DIC_ORDER = #{dicOrder,jdbcType=INTEGER},
+			</if>
+			<if test="dicChannel != null">
+				DIC_CHANNEL = #{dicChannel,jdbcType=VARCHAR},
+			</if>
+			<if test="insertcode != null">
+				INSERTCODE = #{insertcode,jdbcType=VARCHAR},
+			</if>
+			<if test="inserttime != null">
+				INSERTTIME = #{inserttime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="systemChannel != null">
+				SYSTEM_CHANNEL = #{systemChannel,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.monkey.db.base.pojo.PwbDictionary">
+		update
+		pwb_dictionary
+		set DIC_TYPE = #{dicType,jdbcType=VARCHAR},
+		DIC_TYPE_LABEL = #{dicTypeLabel,jdbcType=VARCHAR},
+		DIC_CODE =
+		#{dicCode,jdbcType=VARCHAR},
+		DIC_VALUE = #{dicValue,jdbcType=VARCHAR},
+		DIC_EXPLAIN = #{dicExplain,jdbcType=VARCHAR},
+		DIC_STATUS =
+		#{dicStatus,jdbcType=VARCHAR},
+		DIC_ORDER =
+		#{dicOrder,jdbcType=INTEGER},
+		DIC_CHANNEL =
+		#{dicChannel,jdbcType=VARCHAR},
+		INSERTCODE =
+		#{insertcode,jdbcType=VARCHAR},
+		INSERTTIME =
+		#{inserttime,jdbcType=TIMESTAMP},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		SYSTEM_CHANNEL = #{systemChannel,jdbcType=VARCHAR}
+		where ID =
+		#{id,jdbcType=BIGINT}
+	</update>
+	<select id="selectByType" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from pwb_dictionary
+		where DIC_TYPE = #{dicType,jdbcType=VARCHAR}
+		and DIC_STATUS = '1'
+		order by DIC_ORDER asc
+	</select>
+</mapper>

@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.monkey.auth.manage.dao.UserMapper">
+	<resultMap id="BaseResultMap" type="com.monkey.auth.manage.pojo.User">
+		<id column="ID" property="id" jdbcType="BIGINT" />
+		<result column="USERCODE" property="usercode" jdbcType="VARCHAR" />
+		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+		<result column="USERNAME" property="username" jdbcType="VARCHAR" />
+		<result column="COMCODE" property="comcode" jdbcType="VARCHAR" />
+		<result column="CREATEDATE" property="createdate" jdbcType="TIMESTAMP" />
+		<result column="UPDATEDATE" property="updatedate" jdbcType="TIMESTAMP" />
+		<result column="CREATORCODE" property="creatorcode" jdbcType="VARCHAR" />
+		<result column="VALIDSTATUS" property="validstatus" jdbcType="VARCHAR" />
+		<result column="USERPHONE" property="userphone" jdbcType="VARCHAR" />
+		<result column="USEREMAIL" property="useremail" jdbcType="VARCHAR" />
+		<result column="MANAGE_COMPANY" property="manageCompany"
+			jdbcType="VARCHAR" />
+		<result column="department" property="department" jdbcType="VARCHAR" />
+		<result column="position" property="position" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		ID, USERCODE, PASSWORD, USERNAME, COMCODE, CREATEDATE,
+		UPDATEDATE,
+		CREATORCODE, VALIDSTATUS,
+		USERPHONE, USEREMAIL,
+		MANAGE_COMPANY, department, position
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.monkey.auth.manage.pojo.UserExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		'true' as QUERYID,
+		<include refid="Base_Column_List" />
+		from pwb_user
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from pwb_user
+		where ID = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		pwb_user
+		where ID = #{id,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.monkey.auth.manage.pojo.UserExample">
+		delete from pwb_user
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.monkey.auth.manage.pojo.User">
+		insert into pwb_user (ID,
+		USERCODE, PASSWORD,
+		USERNAME, COMCODE, CREATEDATE,
+		UPDATEDATE,
+		CREATORCODE, VALIDSTATUS,
+		USERPHONE, USEREMAIL, MANAGE_COMPANY,
+		department, position)
+		values (#{id,jdbcType=BIGINT},
+		#{usercode,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR},
+		#{username,jdbcType=VARCHAR}, #{comcode,jdbcType=VARCHAR},
+		#{createdate,jdbcType=TIMESTAMP},
+		#{updatedate,jdbcType=TIMESTAMP},
+		#{creatorcode,jdbcType=VARCHAR},
+		#{validstatus,jdbcType=VARCHAR},
+		#{userphone,jdbcType=VARCHAR}, #{useremail,jdbcType=VARCHAR},
+		#{manageCompany,jdbcType=VARCHAR},
+		#{department,jdbcType=VARCHAR},
+		#{position,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.monkey.auth.manage.pojo.User">
+		insert into pwb_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="usercode != null">
+				USERCODE,
+			</if>
+			<if test="password != null">
+				PASSWORD,
+			</if>
+			<if test="username != null">
+				USERNAME,
+			</if>
+			<if test="comcode != null">
+				COMCODE,
+			</if>
+			<if test="createdate != null">
+				CREATEDATE,
+			</if>
+			<if test="updatedate != null">
+				UPDATEDATE,
+			</if>
+			<if test="creatorcode != null">
+				CREATORCODE,
+			</if>
+			<if test="validstatus != null">
+				VALIDSTATUS,
+			</if>
+			<if test="userphone != null">
+				USERPHONE,
+			</if>
+			<if test="useremail != null">
+				USEREMAIL,
+			</if>
+			<if test="manageCompany != null">
+				MANAGE_COMPANY,
+			</if>
+			<if test="department != null">
+				department,
+			</if>
+			<if test="position != null">
+				position,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="usercode != null">
+				#{usercode,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="comcode != null">
+				#{comcode,jdbcType=VARCHAR},
+			</if>
+			<if test="createdate != null">
+				#{createdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatedate != null">
+				#{updatedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creatorcode != null">
+				#{creatorcode,jdbcType=VARCHAR},
+			</if>
+			<if test="validstatus != null">
+				#{validstatus,jdbcType=VARCHAR},
+			</if>
+			<if test="userphone != null">
+				#{userphone,jdbcType=VARCHAR},
+			</if>
+			<if test="useremail != null">
+				#{useremail,jdbcType=VARCHAR},
+			</if>
+			<if test="manageCompany != null">
+				#{manageCompany,jdbcType=VARCHAR},
+			</if>
+			<if test="department != null">
+				#{department,jdbcType=VARCHAR},
+			</if>
+			<if test="position != null">
+				#{position,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.monkey.auth.manage.pojo.UserExample"
+		resultType="java.lang.Integer">
+		select count(*) from pwb_user
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update pwb_user
+		<set>
+			<if test="record.id != null">
+				ID = #{record.id,jdbcType=BIGINT},
+			</if>
+			<if test="record.usercode != null">
+				USERCODE = #{record.usercode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.password != null">
+				PASSWORD = #{record.password,jdbcType=VARCHAR},
+			</if>
+			<if test="record.username != null">
+				USERNAME = #{record.username,jdbcType=VARCHAR},
+			</if>
+			<if test="record.comcode != null">
+				COMCODE = #{record.comcode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createdate != null">
+				CREATEDATE = #{record.createdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updatedate != null">
+				UPDATEDATE = #{record.updatedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.creatorcode != null">
+				CREATORCODE = #{record.creatorcode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.validstatus != null">
+				VALIDSTATUS = #{record.validstatus,jdbcType=VARCHAR},
+			</if>
+			<if test="record.userphone != null">
+				USERPHONE = #{record.userphone,jdbcType=VARCHAR},
+			</if>
+			<if test="record.useremail != null">
+				USEREMAIL = #{record.useremail,jdbcType=VARCHAR},
+			</if>
+			<if test="record.manageCompany != null">
+				MANAGE_COMPANY =
+				#{record.manageCompany,jdbcType=VARCHAR},
+			</if>
+			<if test="record.department != null">
+				department = #{record.department,jdbcType=VARCHAR},
+			</if>
+			<if test="record.position != null">
+				position = #{record.position,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update pwb_user
+		set ID = #{record.id,jdbcType=BIGINT},
+		USERCODE =
+		#{record.usercode,jdbcType=VARCHAR},
+		PASSWORD =
+		#{record.password,jdbcType=VARCHAR},
+		USERNAME =
+		#{record.username,jdbcType=VARCHAR},
+		COMCODE =
+		#{record.comcode,jdbcType=VARCHAR},
+		CREATEDATE =
+		#{record.createdate,jdbcType=TIMESTAMP},
+		UPDATEDATE =
+		#{record.updatedate,jdbcType=TIMESTAMP},
+		CREATORCODE =
+		#{record.creatorcode,jdbcType=VARCHAR},
+		VALIDSTATUS =
+		#{record.validstatus,jdbcType=VARCHAR},
+		USERPHONE =
+		#{record.userphone,jdbcType=VARCHAR},
+		USEREMAIL =
+		#{record.useremail,jdbcType=VARCHAR},
+		MANAGE_COMPANY =
+		#{record.manageCompany,jdbcType=VARCHAR},
+		department =
+		#{record.department,jdbcType=VARCHAR},
+		position =
+		#{record.position,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.monkey.auth.manage.pojo.User">
+		update pwb_user
+		<set>
+			<if test="usercode != null">
+				USERCODE = #{usercode,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				PASSWORD = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				USERNAME = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="comcode != null">
+				COMCODE = #{comcode,jdbcType=VARCHAR},
+			</if>
+			<if test="createdate != null">
+				CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatedate != null">
+				UPDATEDATE = #{updatedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creatorcode != null">
+				CREATORCODE = #{creatorcode,jdbcType=VARCHAR},
+			</if>
+			<if test="validstatus != null">
+				VALIDSTATUS = #{validstatus,jdbcType=VARCHAR},
+			</if>
+			<if test="userphone != null">
+				USERPHONE = #{userphone,jdbcType=VARCHAR},
+			</if>
+			<if test="useremail != null">
+				USEREMAIL = #{useremail,jdbcType=VARCHAR},
+			</if>
+			<if test="manageCompany != null">
+				MANAGE_COMPANY = #{manageCompany,jdbcType=VARCHAR},
+			</if>
+			<if test="department != null">
+				department = #{department,jdbcType=VARCHAR},
+			</if>
+			<if test="position != null">
+				position = #{position,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.monkey.auth.manage.pojo.User">
+		update pwb_user
+		set USERCODE = #{usercode,jdbcType=VARCHAR},
+		PASSWORD =
+		#{password,jdbcType=VARCHAR},
+		USERNAME = #{username,jdbcType=VARCHAR},
+		COMCODE = #{comcode,jdbcType=VARCHAR},
+		CREATEDATE =
+		#{createdate,jdbcType=TIMESTAMP},
+		UPDATEDATE =
+		#{updatedate,jdbcType=TIMESTAMP},
+		CREATORCODE =
+		#{creatorcode,jdbcType=VARCHAR},
+		VALIDSTATUS =
+		#{validstatus,jdbcType=VARCHAR},
+		USERPHONE =
+		#{userphone,jdbcType=VARCHAR},
+		USEREMAIL =
+		#{useremail,jdbcType=VARCHAR},
+		MANAGE_COMPANY =
+		#{manageCompany,jdbcType=VARCHAR},
+		department =
+		#{department,jdbcType=VARCHAR},
+		position = #{position,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=BIGINT}
+	</update>
+	<select id="queryByPage" resultMap="BaseResultMap">
+		select
+		ID, USERCODE, PASSWORD,
+		USERNAME, COMCODE, CREATEDATE,
+		UPDATEDATE, CREATORCODE, if(VALIDSTATUS=1,'有效','失效') as VALIDSTATUS,
+		USERPHONE, USEREMAIL,DEPARTMENT,POSITION
+		from pwb_user where 1 = 1
+		<if test="userName != null and userName != '' ">
+			and USERNAME like CONCAT('%',#{userName},'%')
+		</if>
+		<if test="userCode != null and userCode != '' ">
+			and USERCODE like CONCAT('%',#{userCode},'%')
+		</if>
+		order by ID LIMIT ${startIndex},${size};
+	</select>
+	<select id="countUser" resultType="java.lang.Integer">
+		select count(id) from pwb_user where 1 = 1
+		<if test="userName != null and userName != '' ">
+			and USERNAME like CONCAT('%',#{userName},'%')
+		</if>
+		<if test="userCode != null and userCode != '' ">
+			and USERCODE like CONCAT('%',#{userCode},'%')
+		</if>
+	</select>
+	<select id="findUserByCondition" resultMap="BaseResultMap">
+		select * from pwb_user where 1 = 1 and VALIDSTATUS=1
+		<if test="userName != null and userName != '' ">
+			and USERNAME != #{userName,jdbcType=VARCHAR}
+		</if>
+		<if test="userCode != null and userCode != '' ">
+			or USERCODE != #{userCode,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<select id="findUserByCondition2" resultMap="BaseResultMap">
+		select * from pwb_user where 1 = 1 and VALIDSTATUS=1
+		<if test="userName != null and userName != '' ">
+			and USERNAME = #{userName,jdbcType=VARCHAR}
+		</if>
+		<if test="userCode != null and userCode != '' ">
+			or USERCODE = #{userCode,jdbcType=VARCHAR}
+		</if>
+	</select>
+</mapper>

@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.monkey.auth.manage.dao.RoleMapper">
+	<resultMap id="BaseResultMap" type="com.monkey.auth.manage.pojo.Role">
+		<id column="ID" property="id" jdbcType="BIGINT" />
+		<result column="ROLE_CODE" property="roleCode" jdbcType="VARCHAR" />
+		<result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+		<result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+		<result column="ENABLED" property="enabled" jdbcType="VARCHAR" />
+		<result column="INSERT_USER" property="insertUser" jdbcType="VARCHAR" />
+		<result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+		<result column="INSERT_TIME" property="insertTime" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		ID, ROLE_CODE, ROLE_NAME, DESCRIPTION, ENABLED,
+		INSERT_USER, UPDATE_USER,
+		INSERT_TIME,
+		UPDATE_TIME
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.monkey.auth.manage.pojo.RoleExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		'true' as QUERYID,
+		<include refid="Base_Column_List" />
+		from pwb_role
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from pwb_role
+		where ID = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		pwb_role
+		where ID = #{id,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.monkey.auth.manage.pojo.RoleExample">
+		delete from pwb_role
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.monkey.auth.manage.pojo.Role">
+		insert into pwb_role (ID,
+		ROLE_CODE, ROLE_NAME,
+		DESCRIPTION, ENABLED, INSERT_USER,
+		UPDATE_USER,
+		INSERT_TIME, UPDATE_TIME
+		)
+		values (#{id,jdbcType=BIGINT},
+		#{roleCode,jdbcType=VARCHAR},
+		#{roleName,jdbcType=VARCHAR},
+		#{description,jdbcType=VARCHAR}, #{enabled,jdbcType=VARCHAR},
+		#{insertUser,jdbcType=VARCHAR},
+		#{updateUser,jdbcType=VARCHAR},
+		#{insertTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.monkey.auth.manage.pojo.Role">
+		insert into pwb_role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="roleCode != null">
+				ROLE_CODE,
+			</if>
+			<if test="roleName != null">
+				ROLE_NAME,
+			</if>
+			<if test="description != null">
+				DESCRIPTION,
+			</if>
+			<if test="enabled != null">
+				ENABLED,
+			</if>
+			<if test="insertUser != null">
+				INSERT_USER,
+			</if>
+			<if test="updateUser != null">
+				UPDATE_USER,
+			</if>
+			<if test="insertTime != null">
+				INSERT_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="roleCode != null">
+				#{roleCode,jdbcType=VARCHAR},
+			</if>
+			<if test="roleName != null">
+				#{roleName,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="enabled != null">
+				#{enabled,jdbcType=VARCHAR},
+			</if>
+			<if test="insertUser != null">
+				#{insertUser,jdbcType=VARCHAR},
+			</if>
+			<if test="updateUser != null">
+				#{updateUser,jdbcType=VARCHAR},
+			</if>
+			<if test="insertTime != null">
+				#{insertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.monkey.auth.manage.pojo.RoleExample"
+		resultType="java.lang.Integer">
+		select count(*) from pwb_role
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update pwb_role
+		<set>
+			<if test="record.id != null">
+				ID = #{record.id,jdbcType=BIGINT},
+			</if>
+			<if test="record.roleCode != null">
+				ROLE_CODE = #{record.roleCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.roleName != null">
+				ROLE_NAME = #{record.roleName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.description != null">
+				DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+			</if>
+			<if test="record.enabled != null">
+				ENABLED = #{record.enabled,jdbcType=VARCHAR},
+			</if>
+			<if test="record.insertUser != null">
+				INSERT_USER = #{record.insertUser,jdbcType=VARCHAR},
+			</if>
+			<if test="record.updateUser != null">
+				UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+			</if>
+			<if test="record.insertTime != null">
+				INSERT_TIME = #{record.insertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updateTime != null">
+				UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update pwb_role
+		set ID = #{record.id,jdbcType=BIGINT},
+		ROLE_CODE =
+		#{record.roleCode,jdbcType=VARCHAR},
+		ROLE_NAME =
+		#{record.roleName,jdbcType=VARCHAR},
+		DESCRIPTION =
+		#{record.description,jdbcType=VARCHAR},
+		ENABLED =
+		#{record.enabled,jdbcType=VARCHAR},
+		INSERT_USER =
+		#{record.insertUser,jdbcType=VARCHAR},
+		UPDATE_USER =
+		#{record.updateUser,jdbcType=VARCHAR},
+		INSERT_TIME =
+		#{record.insertTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME =
+		#{record.updateTime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.monkey.auth.manage.pojo.Role">
+		update pwb_role
+		<set>
+			<if test="roleCode != null">
+				ROLE_CODE = #{roleCode,jdbcType=VARCHAR},
+			</if>
+			<if test="roleName != null">
+				ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				DESCRIPTION = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="enabled != null">
+				ENABLED = #{enabled,jdbcType=VARCHAR},
+			</if>
+			<if test="insertUser != null">
+				INSERT_USER = #{insertUser,jdbcType=VARCHAR},
+			</if>
+			<if test="updateUser != null">
+				UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+			</if>
+			<if test="insertTime != null">
+				INSERT_TIME = #{insertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.monkey.auth.manage.pojo.Role">
+		update pwb_role
+		set ROLE_CODE = #{roleCode,jdbcType=VARCHAR},
+		ROLE_NAME =
+		#{roleName,jdbcType=VARCHAR},
+		DESCRIPTION =
+		#{description,jdbcType=VARCHAR},
+		ENABLED = #{enabled,jdbcType=VARCHAR},
+		INSERT_USER = #{insertUser,jdbcType=VARCHAR},
+		UPDATE_USER =
+		#{updateUser,jdbcType=VARCHAR},
+		INSERT_TIME =
+		#{insertTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME =
+		#{updateTime,jdbcType=TIMESTAMP}
+		where ID = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="selectByUserName" resultMap="BaseResultMap">
+		SELECT
+		r.*
+		FROM
+		pwb_role r
+		LEFT JOIN pwb_user_role ur ON r.ID = ur.ROLE_CODE
+		LEFT JOIN pwb_user u
+		ON ur.USER_CODE = u.ID
+		WHERE
+		u.USERCODE = #{userName}
+	</select>
+
+	<select id="queryByPage" resultMap="BaseResultMap">
+		select
+		ID, ROLE_CODE, ROLE_NAME,
+		DESCRIPTION, if(ENABLED=1,'启用','未启用')
+		as ENABLED, INSERT_USER,
+		UPDATE_USER, INSERT_TIME, UPDATE_TIME
+		from
+		pwb_role where 1 = 1
+		<if test="roleName != null and roleName != '' ">
+			and ROLE_NAME like CONCAT('%',#{roleName},'%')
+		</if>
+		<if test="roleCode != null and roleCode != '' ">
+			and ROLE_CODE like CONCAT('%',#{roleCode},'%')
+		</if>
+		order by ID LIMIT ${startIndex},${size};
+	</select>
+	<select id="countRole" resultType="java.lang.Integer">
+		select count(id) from pwb_role where 1 = 1
+		<if test="roleName != null and roleName != '' ">
+			and ROLE_NAME like CONCAT('%',#{roleName},'%')
+		</if>
+		<if test="roleCode != null and roleCode != '' ">
+			and ROLE_CODE like CONCAT('%',#{roleCode},'%')
+		</if>
+	</select>
+	<select id="findRoleByCondition" parameterType="com.monkey.auth.manage.pojo.Role"
+		resultMap="BaseResultMap">
+		select * from pwb_role where 1 = 1 and ENABLED=1
+		<if test="roleName != null and roleName != '' ">
+			and ROLE_NAME = #{roleName,jdbcType=VARCHAR}
+		</if>
+		<if test="roleCode != null and roleCode != '' ">
+			or ROLE_CODE = #{roleCode,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<select id="findRoleByCondition2" parameterType="com.monkey.auth.manage.pojo.Role"
+		resultMap="BaseResultMap">
+		select * from pwb_role where 1 = 1 and ENABLED=1
+		<if test="roleName != null and roleName != '' ">
+			and ROLE_NAME != #{roleName,jdbcType=VARCHAR}
+		</if>
+		<if test="roleCode != null and roleCode != '' ">
+			or ROLE_CODE != #{roleCode,jdbcType=VARCHAR}
+		</if>
+	</select>
+</mapper>
