@@ -1,9 +1,13 @@
 package com.monkey.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserPatient {
-    private Long id;
+public class UserPatient implements Serializable {
+
+	private static final long serialVersionUID = 3108959868100125880L;
+
+	private Long id;
 
     private Date gmtCreate;
 

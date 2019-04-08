@@ -15,6 +15,6 @@
     <!-- targetPackage：mapper接口生成的位置 -->  
     <javaClientGenerator targetPackage="com.monkey.dao" targetProject="monkeyKing/src/main/java" type="XMLMAPPER" />
     <!--数据库里面的表名  -->
-    <table  tableName="user_patient"></table>
+    <table  tableName="tag"></table>
   </context>
 </generatorConfiguration>
