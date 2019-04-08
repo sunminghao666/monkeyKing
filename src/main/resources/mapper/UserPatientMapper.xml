@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.monkey.mapper.UserPatientMapper">
-  <resultMap id="BaseResultMap" type="com.monkey.dto.UserPatient">
+  <resultMap id="BaseResultMap" type="com.monkey.bussiness.dto.UserPatient">
     <result column="id" jdbcType="BIGINT" property="id" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
@@ -17,7 +17,7 @@
     patient_age
   </sql>
 
-  <insert id="saveUserPatient" parameterType="com.monkey.dto.UserPatient">
+  <insert id="saveUserPatient" parameterType="com.monkey.bussiness.dto.UserPatient">
     insert into user_patient
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

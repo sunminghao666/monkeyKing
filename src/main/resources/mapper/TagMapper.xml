@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.monkey.dao.TagMapper">
-  <resultMap id="BaseResultMap" type="com.monkey.dto.Tag">
+<mapper namespace="com.monkey.bussiness.dao.TagMapper">
+  <resultMap id="BaseResultMap" type="com.monkey.bussiness.dto.Tag">
     <result column="id" jdbcType="BIGINT" property="id" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
@@ -29,7 +29,7 @@
 			</where>
 	</select>
 
-  <insert id="insertSelective" parameterType="com.monkey.dto.Tag">
+  <insert id="insertSelective" parameterType="com.monkey.bussiness.dto.Tag">
     insert into tag
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
