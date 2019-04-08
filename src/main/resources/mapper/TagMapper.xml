@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monkey.dao.TagMapper">
+  <resultMap id="BaseResultMap" type="com.monkey.dto.Tag">
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
+    <result column="tag_type" jdbcType="INTEGER" property="tagType" />
+    <result column="tag_name" jdbcType="VARCHAR" property="tagName" />
+    <result column="effective_flag" jdbcType="INTEGER" property="effectiveFlag" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, gmt_create, gmt_modify, tag_type, tag_name, effective_flag
+  </sql>
+
+	<select id="searchTag" parameterType="java.util.Map" resultMap="BaseResultMap" >
+		select
+			<include refid="Base_Column_List" />
+		from
+			tag
+			<where>
+				<if test="tagType != null">
+					tag_type = #{tagType,jdbcType=INTEGER}
+				</if>
+				<if test="effectiveFlag != null">
+					effective_flag = #{effectiveFlag,jdbcType=INTEGER}
+				</if>
+			</where>
+	</select>
+
+  <insert id="insertSelective" parameterType="com.monkey.dto.Tag">
+    insert into tag
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModify != null">
+        gmt_modify,
+      </if>
+      <if test="tagType != null">
+        tag_type,
+      </if>
+      <if test="tagName != null">
+        tag_name,
+      </if>
+      <if test="effectiveFlag != null">
+        effective_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null">
+        #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tagType != null">
+        #{tagType,jdbcType=INTEGER},
+      </if>
+      <if test="tagName != null">
+        #{tagName,jdbcType=VARCHAR},
+      </if>
+      <if test="effectiveFlag != null">
+        #{effectiveFlag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>
