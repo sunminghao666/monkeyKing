@@ -9,6 +9,13 @@ public enum MonkeyKingReturnEnum {
 	
 	REQ_PARAM_IS_NULL(-10000, "请求参数为空"),
 
+	
+	
+	ADD_PATIENT_INFO(-11001, "请添加就诊人信息"),
+	ADD_CURE_PROJECT_INFO(-11001, "请添加治疗项目"),
+
+	SAVE_APP_FAILED(-11003, "预约失败，请稍后重试"),
+
 	;
 
 	MonkeyKingReturnEnum(Integer code, String msg) {

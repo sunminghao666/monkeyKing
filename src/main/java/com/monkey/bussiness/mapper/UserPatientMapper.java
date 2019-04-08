@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserPatientMapper {
 
 	/**
-	 * 保存就诊人信息
+	  * 保存就诊人信息
 	 * 
 	 * @param
 	 * @since 2019-04-07 10:00:00
@@ -21,7 +21,7 @@ public interface UserPatientMapper {
     int saveUserPatient(UserPatient dto);
 
 	/**
-	 * 查询就诊人信息
+	  * 查询就诊人信息
 	 * 
 	 * @param
 	 * @since 2019-04-07 10:00:00

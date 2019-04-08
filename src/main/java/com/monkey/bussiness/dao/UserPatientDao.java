@@ -25,7 +25,7 @@ public interface UserPatientDao {
 	int saveUserPatient(Long userId, String patientName, Integer patientSex, String patientPhoneNo, Integer patientAge);
 
 	/**
-	 * 保存就诊人信息
+	 * 查询就诊人信息列表
 	 * 
 	 * @param
 	 * @since 2019-04-07 10:00:00
@@ -33,5 +33,15 @@ public interface UserPatientDao {
 	 * @return
 	 */
 	List<UserPatient> searchUserPatientForList(Long userId);
+
+	/**
+	 * 查询就诊人信息
+	 * 
+	 * @param
+	 * @since 2019-04-07 10:00:00
+	 * @author SunMinghao
+	 * @return
+	 */
+	UserPatient searchUserPatientForDto(Long patientId);
 
 }

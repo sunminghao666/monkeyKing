@@ -62,7 +62,7 @@ public class UserPatientDaoImpl implements UserPatientDao {
 	}
 
 	/**
-	 * 查询用户就诊人信息
+	 * 查询用户就诊人信息列表
 	 * 
 	 * @param
 	 * @since 2019-04-07 10:00:00
@@ -83,6 +83,33 @@ public class UserPatientDaoImpl implements UserPatientDao {
 		if (list != null && !list.isEmpty()) {
 			return list;
 		}
+		return null;
+	}
+
+	/**
+	 * 查询就诊人信息
+	 * 
+	 * @param
+	 * @since 2019-04-07 10:00:00
+	 * @author SunMinghao
+	 * @return
+	 */
+	@Override
+	public UserPatient searchUserPatientForDto(Long patientId) {
+
+		// 查询就诊人信息
+		List<UserPatient> list = null;
+
+		// 请求参数
+		Map<String, Object> reqParam = new HashMap<String, Object>();
+		reqParam.put("id", patientId);
+
+		list = userPatientMapper.searchUserPatient(reqParam);
+
+		if (list != null && list.size() == 1) {
+			return list.get(0);
+		}
+
 		return null;
 	}
 
