@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monkey.bussiness.mapper.ClinicMapper">
+  <resultMap id="BaseResultMap" type="com.monkey.bussiness.dto.Clinic">
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
+    <result column="clinic_name" jdbcType="VARCHAR" property="clinicName" />
+    <result column="clinic_address" jdbcType="VARCHAR" property="clinicAddress" />
+    <result column="clinic_telephone" jdbcType="VARCHAR" property="clinicTelephone" />
+    <result column="longitude" jdbcType="BIGINT" property="longitude" />
+    <result column="latitude" jdbcType="BIGINT" property="latitude" />
+    <result column="contacts" jdbcType="VARCHAR" property="contacts" />
+    <result column="wifi_account" jdbcType="VARCHAR" property="wifiAccount" />
+    <result column="wifi_password" jdbcType="VARCHAR" property="wifiPassword" />
+    <result column="business_time" jdbcType="VARCHAR" property="businessTime" />
+    <result column="effective_flag" jdbcType="INTEGER" property="effectiveFlag" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, gmt_create, gmt_modify, clinic_name, clinic_address, clinic_telephone, longitude, 
+    latitude, contacts, wifi_account, wifi_password, business_time, effective_flag
+  </sql>
+
+	<select id="searchClinic" parameterType="java.util.Map" resultMap="BaseResultMap" >
+		select
+			<include refid="Base_Column_List" />
+		from
+			clinic
+			<where>
+				<if test="id != null">
+					id = #{id,jdbcType=BIGINT}
+				</if>
+				<if test="clinicName != null">
+					and clinic_name = #{clinicName,jdbcType=INTEGER}
+				</if>
+				<if test="effectiveFlag != null">
+					and effective_flag = #{effectiveFlag,jdbcType=INTEGER}
+				</if>
+			</where>
+	</select>
+
+</mapper>

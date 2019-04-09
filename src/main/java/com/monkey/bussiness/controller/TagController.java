@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.monkey.basic.common.ResponseResult;
 import com.monkey.bussiness.service.TagService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 
+@Api(value="/userApp", tags="标签管理模块")
 @RestController
 @RequestMapping("/tag")
 public class TagController {

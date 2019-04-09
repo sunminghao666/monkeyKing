@@ -22,9 +22,11 @@ import com.monkey.bussiness.bean.reqBean.SavePatientBean;
 import com.monkey.bussiness.enums.MonkeyKingReturnEnum;
 import com.monkey.bussiness.service.PatientService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 
+@Api(value="/userApp", tags="就诊人管理模块")
 @RestController
 @RequestMapping("/userPatient")
 public class PatientController {
