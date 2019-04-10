@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.monkey.gzpt.dao.GzptInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.monkey.gzpt.pojo.GzptInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="access_token" property="accessToken" jdbcType="VARCHAR" />
+    <result column="access_token_update_time" property="accessTokenUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="app_id" property="appId" jdbcType="VARCHAR" />
+    <result column="appsecret" property="appsecret" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="encoding_AES_key" property="encodingAesKey" jdbcType="VARCHAR" />
+    <result column="jsapi_ticket" property="jsapiTicket" jdbcType="VARCHAR" />
+    <result column="jsapi_ticket_update_time" property="jsapiTicketUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="date_created" property="dateCreated" jdbcType="TIMESTAMP" />
+    <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
+    <result column="date_updated" property="dateUpdated" jdbcType="TIMESTAMP" />
+    <result column="updated_by" property="updatedBy" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_name, password, access_token, access_token_update_time, app_id, appsecret, 
+    url, token, encoding_AES_key, jsapi_ticket, jsapi_ticket_update_time, date_created, 
+    created_by, date_updated, updated_by, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from gzpt_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from gzpt_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.monkey.gzpt.pojo.GzptInfo" >
+    insert into gzpt_info (id, user_name, password, 
+      access_token, access_token_update_time, app_id, 
+      appsecret, url, token, 
+      encoding_AES_key, jsapi_ticket, jsapi_ticket_update_time, 
+      date_created, created_by, date_updated, 
+      updated_by, remark)
+    values (#{id,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{accessToken,jdbcType=VARCHAR}, #{accessTokenUpdateTime,jdbcType=TIMESTAMP}, #{appId,jdbcType=VARCHAR}, 
+      #{appsecret,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, 
+      #{encodingAesKey,jdbcType=VARCHAR}, #{jsapiTicket,jdbcType=VARCHAR}, #{jsapiTicketUpdateTime,jdbcType=TIMESTAMP}, 
+      #{dateCreated,jdbcType=TIMESTAMP}, #{createdBy,jdbcType=VARCHAR}, #{dateUpdated,jdbcType=TIMESTAMP}, 
+      #{updatedBy,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.monkey.gzpt.pojo.GzptInfo" >
+    insert into gzpt_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="accessToken != null" >
+        access_token,
+      </if>
+      <if test="accessTokenUpdateTime != null" >
+        access_token_update_time,
+      </if>
+      <if test="appId != null" >
+        app_id,
+      </if>
+      <if test="appsecret != null" >
+        appsecret,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="token != null" >
+        token,
+      </if>
+      <if test="encodingAesKey != null" >
+        encoding_AES_key,
+      </if>
+      <if test="jsapiTicket != null" >
+        jsapi_ticket,
+      </if>
+      <if test="jsapiTicketUpdateTime != null" >
+        jsapi_ticket_update_time,
+      </if>
+      <if test="dateCreated != null" >
+        date_created,
+      </if>
+      <if test="createdBy != null" >
+        created_by,
+      </if>
+      <if test="dateUpdated != null" >
+        date_updated,
+      </if>
+      <if test="updatedBy != null" >
+        updated_by,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="accessToken != null" >
+        #{accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="accessTokenUpdateTime != null" >
+        #{accessTokenUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appId != null" >
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="appsecret != null" >
+        #{appsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="encodingAesKey != null" >
+        #{encodingAesKey,jdbcType=VARCHAR},
+      </if>
+      <if test="jsapiTicket != null" >
+        #{jsapiTicket,jdbcType=VARCHAR},
+      </if>
+      <if test="jsapiTicketUpdateTime != null" >
+        #{jsapiTicketUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dateCreated != null" >
+        #{dateCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="dateUpdated != null" >
+        #{dateUpdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null" >
+        #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.monkey.gzpt.pojo.GzptInfo" >
+    update gzpt_info
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="accessToken != null" >
+        access_token = #{accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="accessTokenUpdateTime != null" >
+        access_token_update_time = #{accessTokenUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appId != null" >
+        app_id = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="appsecret != null" >
+        appsecret = #{appsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="encodingAesKey != null" >
+        encoding_AES_key = #{encodingAesKey,jdbcType=VARCHAR},
+      </if>
+      <if test="jsapiTicket != null" >
+        jsapi_ticket = #{jsapiTicket,jdbcType=VARCHAR},
+      </if>
+      <if test="jsapiTicketUpdateTime != null" >
+        jsapi_ticket_update_time = #{jsapiTicketUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dateCreated != null" >
+        date_created = #{dateCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null" >
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="dateUpdated != null" >
+        date_updated = #{dateUpdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null" >
+        updated_by = #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.monkey.gzpt.pojo.GzptInfo" >
+    update gzpt_info
+    set user_name = #{userName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      access_token = #{accessToken,jdbcType=VARCHAR},
+      access_token_update_time = #{accessTokenUpdateTime,jdbcType=TIMESTAMP},
+      app_id = #{appId,jdbcType=VARCHAR},
+      appsecret = #{appsecret,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      encoding_AES_key = #{encodingAesKey,jdbcType=VARCHAR},
+      jsapi_ticket = #{jsapiTicket,jdbcType=VARCHAR},
+      jsapi_ticket_update_time = #{jsapiTicketUpdateTime,jdbcType=TIMESTAMP},
+      date_created = #{dateCreated,jdbcType=TIMESTAMP},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      date_updated = #{dateUpdated,jdbcType=TIMESTAMP},
+      updated_by = #{updatedBy,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="selectByUserName" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from gzpt_info
+    where user_name = #{userName,jdbcType=VARCHAR}
+  </select>
+  
+</mapper>

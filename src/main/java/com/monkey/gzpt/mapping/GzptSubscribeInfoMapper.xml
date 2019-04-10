@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.monkey.gzpt.dao.GzptSubscribeInfoMapper">
+	<resultMap id="BaseResultMap" type="com.monkey.gzpt.pojo.GzptSubscribeInfo">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="openid" property="openid" jdbcType="VARCHAR" />
+		<result column="customer_id" property="customerId" jdbcType="BIGINT" />
+		<result column="unionid" property="unionid" jdbcType="VARCHAR" />
+		<result column="subscribe" property="subscribe" jdbcType="VARCHAR" />
+		<result column="subscribe_time" property="subscribeTime"
+			jdbcType="TIMESTAMP" />
+		<result column="nickname" property="nickname" jdbcType="VARCHAR" />
+		<result column="headimgurl" property="headimgurl" jdbcType="VARCHAR" />
+		<result column="sex" property="sex" jdbcType="VARCHAR" />
+		<result column="language" property="language" jdbcType="VARCHAR" />
+		<result column="country" property="country" jdbcType="VARCHAR" />
+		<result column="province" property="province" jdbcType="VARCHAR" />
+		<result column="city" property="city" jdbcType="VARCHAR" />
+		<result column="groupid" property="groupid" jdbcType="VARCHAR" />
+		<result column="tagid_list" property="tagidList" jdbcType="VARCHAR" />
+		<result column="date_created" property="dateCreated" jdbcType="TIMESTAMP" />
+		<result column="created_by" property="createdBy" jdbcType="VARCHAR" />
+		<result column="date_updated" property="dateUpdated" jdbcType="TIMESTAMP" />
+		<result column="updated_by" property="updatedBy" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, openid, customer_id, unionid, subscribe,
+		subscribe_time, nickname,
+		headimgurl,
+		sex, language, country, province,
+		city, groupid, tagid_list, date_created,
+		created_by,
+		date_updated,
+		updated_by, remark
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from gzpt_subscribe_info
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		gzpt_subscribe_info
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.monkey.gzpt.pojo.GzptSubscribeInfo">
+		insert into
+		gzpt_subscribe_info (id, openid, customer_id,
+		unionid, subscribe,
+		subscribe_time,
+		nickname, headimgurl, sex,
+		language, country, province,
+		city, groupid, tagid_list,
+		date_created, created_by, date_updated,
+		updated_by, remark)
+		values (#{id,jdbcType=BIGINT},
+		#{openid,jdbcType=VARCHAR},
+		#{customerId,jdbcType=BIGINT},
+		#{unionid,jdbcType=VARCHAR}, #{subscribe,jdbcType=VARCHAR},
+		#{subscribeTime,jdbcType=TIMESTAMP},
+		#{nickname,jdbcType=VARCHAR},
+		#{headimgurl,jdbcType=VARCHAR},
+		#{sex,jdbcType=VARCHAR},
+		#{language,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR},
+		#{province,jdbcType=VARCHAR},
+		#{city,jdbcType=VARCHAR},
+		#{groupid,jdbcType=VARCHAR},
+		#{tagidList,jdbcType=VARCHAR},
+		#{dateCreated,jdbcType=TIMESTAMP}, #{createdBy,jdbcType=VARCHAR},
+		#{dateUpdated,jdbcType=TIMESTAMP},
+		#{updatedBy,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.monkey.gzpt.pojo.GzptSubscribeInfo">
+		insert into gzpt_subscribe_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="openid != null">
+				openid,
+			</if>
+			<if test="customerId != null">
+				customer_id,
+			</if>
+			<if test="unionid != null">
+				unionid,
+			</if>
+			<if test="subscribe != null">
+				subscribe,
+			</if>
+			<if test="subscribeTime != null">
+				subscribe_time,
+			</if>
+			<if test="nickname != null">
+				nickname,
+			</if>
+			<if test="headimgurl != null">
+				headimgurl,
+			</if>
+			<if test="sex != null">
+				sex,
+			</if>
+			<if test="language != null">
+				language,
+			</if>
+			<if test="country != null">
+				country,
+			</if>
+			<if test="province != null">
+				province,
+			</if>
+			<if test="city != null">
+				city,
+			</if>
+			<if test="groupid != null">
+				groupid,
+			</if>
+			<if test="tagidList != null">
+				tagid_list,
+			</if>
+			<if test="dateCreated != null">
+				date_created,
+			</if>
+			<if test="createdBy != null">
+				created_by,
+			</if>
+			<if test="dateUpdated != null">
+				date_updated,
+			</if>
+			<if test="updatedBy != null">
+				updated_by,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="openid != null">
+				#{openid,jdbcType=VARCHAR},
+			</if>
+			<if test="customerId != null">
+				#{customerId,jdbcType=BIGINT},
+			</if>
+			<if test="unionid != null">
+				#{unionid,jdbcType=VARCHAR},
+			</if>
+			<if test="subscribe != null">
+				#{subscribe,jdbcType=VARCHAR},
+			</if>
+			<if test="subscribeTime != null">
+				#{subscribeTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="nickname != null">
+				#{nickname,jdbcType=VARCHAR},
+			</if>
+			<if test="headimgurl != null">
+				#{headimgurl,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="language != null">
+				#{language,jdbcType=VARCHAR},
+			</if>
+			<if test="country != null">
+				#{country,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				#{province,jdbcType=VARCHAR},
+			</if>
+			<if test="city != null">
+				#{city,jdbcType=VARCHAR},
+			</if>
+			<if test="groupid != null">
+				#{groupid,jdbcType=VARCHAR},
+			</if>
+			<if test="tagidList != null">
+				#{tagidList,jdbcType=VARCHAR},
+			</if>
+			<if test="dateCreated != null">
+				#{dateCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createdBy != null">
+				#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="dateUpdated != null">
+				#{dateUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatedBy != null">
+				#{updatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.monkey.gzpt.pojo.GzptSubscribeInfo">
+		update gzpt_subscribe_info
+		<set>
+			<if test="openid != null">
+				openid = #{openid,jdbcType=VARCHAR},
+			</if>
+			<if test="customerId != null">
+				customer_id = #{customerId,jdbcType=BIGINT},
+			</if>
+			<if test="unionid != null">
+				unionid = #{unionid,jdbcType=VARCHAR},
+			</if>
+			<if test="subscribe != null">
+				subscribe = #{subscribe,jdbcType=VARCHAR},
+			</if>
+			<if test="subscribeTime != null">
+				subscribe_time = #{subscribeTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="nickname != null">
+				nickname = #{nickname,jdbcType=VARCHAR},
+			</if>
+			<if test="headimgurl != null">
+				headimgurl = #{headimgurl,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				sex = #{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="language != null">
+				language = #{language,jdbcType=VARCHAR},
+			</if>
+			<if test="country != null">
+				country = #{country,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				province = #{province,jdbcType=VARCHAR},
+			</if>
+			<if test="city != null">
+				city = #{city,jdbcType=VARCHAR},
+			</if>
+			<if test="groupid != null">
+				groupid = #{groupid,jdbcType=VARCHAR},
+			</if>
+			<if test="tagidList != null">
+				tagid_list = #{tagidList,jdbcType=VARCHAR},
+			</if>
+			<if test="dateCreated != null">
+				date_created = #{dateCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createdBy != null">
+				created_by = #{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="dateUpdated != null">
+				date_updated = #{dateUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatedBy != null">
+				updated_by = #{updatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.monkey.gzpt.pojo.GzptSubscribeInfo">
+		update
+		gzpt_subscribe_info
+		set openid = #{openid,jdbcType=VARCHAR},
+		customer_id = #{customerId,jdbcType=BIGINT},
+		unionid =
+		#{unionid,jdbcType=VARCHAR},
+		subscribe = #{subscribe,jdbcType=VARCHAR},
+		subscribe_time = #{subscribeTime,jdbcType=TIMESTAMP},
+		nickname =
+		#{nickname,jdbcType=VARCHAR},
+		headimgurl =
+		#{headimgurl,jdbcType=VARCHAR},
+		sex = #{sex,jdbcType=VARCHAR},
+		language
+		= #{language,jdbcType=VARCHAR},
+		country = #{country,jdbcType=VARCHAR},
+		province = #{province,jdbcType=VARCHAR},
+		city =
+		#{city,jdbcType=VARCHAR},
+		groupid = #{groupid,jdbcType=VARCHAR},
+		tagid_list = #{tagidList,jdbcType=VARCHAR},
+		date_created =
+		#{dateCreated,jdbcType=TIMESTAMP},
+		created_by =
+		#{createdBy,jdbcType=VARCHAR},
+		date_updated =
+		#{dateUpdated,jdbcType=TIMESTAMP},
+		updated_by =
+		#{updatedBy,jdbcType=VARCHAR},
+		remark = #{remark,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="selectByOpenId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from gzpt_subscribe_info
+		where openid = #{openId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectByCustomerId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from gzpt_subscribe_info
+		where customer_id = #{customerId,jdbcType=BIGINT}
+	</select>
+	
+	<select id="selectByCustomerIdAndSubscribe" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from gzpt_subscribe_info
+		where customer_id = #{customerId,jdbcType=BIGINT} 
+		and subscribe = '1'
+	</select>
+		<select id="selectByCustomerIdAndOpenId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from gzpt_subscribe_info
+		where customer_id = #{customerId,jdbcType=BIGINT}
+		and openid = #{openId,jdbcType=VARCHAR}
+	</select>
+	<update id="updateByCustomerId" parameterType="com.monkey.gzpt.pojo.GzptSubscribeInfo">
+		update gzpt_subscribe_info
+		<set>
+			<if test="openid != null">
+				openid = #{openid,jdbcType=VARCHAR},
+			</if>
+			<if test="customerId != null">
+				customer_id = #{customerId,jdbcType=BIGINT},
+			</if>
+			<if test="unionid != null">
+				unionid = #{unionid,jdbcType=VARCHAR},
+			</if>
+			<if test="subscribe != null">
+				subscribe = #{subscribe,jdbcType=VARCHAR},
+			</if>
+			<if test="subscribeTime != null">
+				subscribe_time = #{subscribeTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="nickname != null">
+				nickname = #{nickname,jdbcType=VARCHAR},
+			</if>
+			<if test="headimgurl != null">
+				headimgurl = #{headimgurl,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				sex = #{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="language != null">
+				language = #{language,jdbcType=VARCHAR},
+			</if>
+			<if test="country != null">
+				country = #{country,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				province = #{province,jdbcType=VARCHAR},
+			</if>
+			<if test="city != null">
+				city = #{city,jdbcType=VARCHAR},
+			</if>
+			<if test="groupid != null">
+				groupid = #{groupid,jdbcType=VARCHAR},
+			</if>
+			<if test="tagidList != null">
+				tagid_list = #{tagidList,jdbcType=VARCHAR},
+			</if>
+			<if test="dateCreated != null">
+				date_created = #{dateCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createdBy != null">
+				created_by = #{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="dateUpdated != null">
+				date_updated = #{dateUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatedBy != null">
+				updated_by = #{updatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where customer_id = #{customerId,jdbcType=BIGINT}
+	</update>
+</mapper>
