@@ -9,10 +9,11 @@ import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLOutputFactory;
 
-import net.sf.json.JSON;
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
-import net.sf.json.xml.XMLSerializer;
+import de.odysseus.staxon.json.JsonXMLConfig;
+import de.odysseus.staxon.json.JsonXMLConfigBuilder;
+import de.odysseus.staxon.json.JsonXMLInputFactory;
+import de.odysseus.staxon.json.JsonXMLOutputFactory;
+import de.odysseus.staxon.xml.util.PrettyXMLEventWriter;
 
 /**
  * 
@@ -23,19 +24,81 @@ import net.sf.json.xml.XMLSerializer;
  * @author chenbaofeng
  */
 public class XmlToJson {
-
-	public static String xml2JSON(String xml) {
-		return new XMLSerializer().read(xml).toString();
-	}
-
-	public static String json2XML(String json) {
+	/**
+	 * 
+	 * xml格式转为json格式
+	 * 
+	 * @param
+	 * @since 2015-8-21 上午10:10:17
+	 * @author wuyuefen
+	 * @return
+	 */
+	public static String xmlTojson(String xml) {
+		StringReader input = new StringReader(xml);
+		StringWriter output = new StringWriter();
+		JsonXMLConfig config = new JsonXMLConfigBuilder().autoArray(true)
+				.autoPrimitive(true).prettyPrint(true).build();
 		try {
-			XMLSerializer serializer = new XMLSerializer();
-			JSON jsonObject = JSONSerializer.toJSON(json);
-			return serializer.write(jsonObject);
+			XMLEventReader reader = XMLInputFactory.newInstance()
+					.createXMLEventReader(input);
+			XMLEventWriter writer = new JsonXMLOutputFactory(config)
+					.createXMLEventWriter(output);
+			writer.add(reader);
+			reader.close();
+			writer.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				output.close();
+				input.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		return null;
+		return output.toString();
 	}
+
+	/**
+	 * 
+	 * json格式转为xml格式
+	 * 
+	 * @param
+	 * @since 2015-8-21 上午10:14:14
+	 * @author wuyuefen
+	 * @return
+	 */
+	public static String jsonToxml(String json) {
+		StringReader input = new StringReader(json);
+		StringWriter output = new StringWriter();
+		JsonXMLConfig config = new JsonXMLConfigBuilder().multiplePI(false)
+				.repairingNamespaces(false).build();
+		try {
+			XMLEventReader reader = new JsonXMLInputFactory(config)
+					.createXMLEventReader(input);
+			XMLEventWriter writer = XMLOutputFactory.newInstance()
+					.createXMLEventWriter(output);
+			writer = new PrettyXMLEventWriter(writer);
+			writer.add(reader);
+			reader.close();
+			writer.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				output.close();
+				input.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		// if (output.toString().length() >= 38) {// remove <?xml version="1.0"
+		// encoding="UTF-8"?>
+		// return output.toString().substring(39);
+		// }
+		return output.toString();
+	}
+
+	public static void main(String[] args) {}
+	
 }
