@@ -75,7 +75,7 @@ public class OpenController extends CommonController {
 
                 if (baowen != null) {
                     TAFLog.info("接入接口请求明文报文xml格式：" + baowen);
-                    baowen = XmlToJson.xml2JSON(baowen);
+                    baowen = XmlToJson.xmlTojson(baowen);
                     TAFLog.info("接入接口请求明文报文json格式：" + baowen);
                     JSONObject jsonObject = JSONObject.fromObject(baowen);
                     jsonObject = jsonObject.getJSONObject("xml");
