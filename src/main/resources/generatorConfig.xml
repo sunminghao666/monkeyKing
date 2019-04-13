@@ -1,109 +1,21 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-	<classPathEntry location="D:\mysql-connector-java-5.1.0-bin.jar" />
-	<!-- <classPathEntry location="F:\dht\workspace\dht\WebRoot\WEB-INF\lib\sqljdbc4.jar" 
-		/> -->
-	<context id="context1">
-		<commentGenerator>
-			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
-			<property name="suppressAllComments" value="true" />
-			<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
-		</commentGenerator>
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://123.56.30.228:3306/monkeyKing" userId="root"
-			password="1q2w3e4r">
-		</jdbcConnection>
-		<javaModelGenerator targetPackage="com.monkey.gzpt.pojo"
-			targetProject="monkeyKing/src/main/java">
-			<property name="enableSubPackages" value="true" />
-			<property name="trimStrings" value="true" />
-		</javaModelGenerator>
-		<sqlMapGenerator targetPackage="com.monkey.gzpt.mapping"
-			targetProject="monkeyKing/src/main/java">
-			<property name="enableSubPackages" value="false" />
-		</sqlMapGenerator>
-		<javaClientGenerator targetPackage="com.monkey.gzpt.dao"
-			targetProject="monkeyKing/src/main/java" type="XMLMAPPER" />
-		<!-- <table tableName="mgy_maintenance_info" domainObjectName="MgyMaintenanceInfo" 
-			enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" 
-			enableSelectByExample="true" selectByExampleQueryId="true"></table> <table 
-			tableName="mgy_job_order_info" domainObjectName="MgyJobOrderInfo" enableCountByExample="true" 
-			enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" 
-			selectByExampleQueryId="true"></table> <table tableName="mgy_commission_detail" 
-			domainObjectName="MgyCommissionDetail" enableCountByExample="true" enableUpdateByExample="true" 
-			enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table> 
-			<table tableName="mgy_customer_white" domainObjectName="MgyCustomerWhite" 
-			enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" 
-			enableSelectByExample="true" selectByExampleQueryId="true"></table> <table 
-			tableName="mgy_cash_order" domainObjectName="MgyCashOrder" enableCountByExample="true" 
-			enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" 
-			selectByExampleQueryId="true"></table> <table tableName="mgy_job_order_info" 
-			domainObjectName="MgyJobOrderInfo" enableCountByExample="true" enableUpdateByExample="true" 
-			enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table> 
-			<table tableName="mgy_maintenance_info" domainObjectName="MgyMaintenanceInfo" 
-			enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" 
-			enableSelectByExample="true" selectByExampleQueryId="true"></table> <table 
-			tableName="mgy_customer_white" domainObjectName="MgyCustomerWhite" enableCountByExample="true" 
-			enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" 
-			selectByExampleQueryId="true"></table> -->
-		<table tableName="gzpt_join_up" domainObjectName="GzptJoinUp"
-			enableCountByExample="true" enableUpdateByExample="true"
-			enableDeleteByExample="true" enableSelectByExample="true"
-			selectByExampleQueryId="true"></table>
-		<!-- <table tableName="mgy_no_pricing_order_assign" domainObjectName="MgyNoPricingOrderAssign"
-			enableCountByExample="true" enableUpdateByExample="true"
-			enableDeleteByExample="true" enableSelectByExample="true"
-			selectByExampleQueryId="true"></table> -->
-		<!-- <table tableName="building_info" domainObjectName="BuildingInfo" enableCountByExample="true" 
-			enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" 
-			selectByExampleQueryId="true"></table> <table tableName="mgy_appointment_order_info" 
-			domainObjectName="MgyAppointmentOrderInfo" enableCountByExample="true" enableUpdateByExample="true" 
-			enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table> 
-			<table tableName="mgy_appraise_info" domainObjectName="MgyAppraiseInfo" enableCountByExample="true" 
-			enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" 
-			selectByExampleQueryId="true"></table> <table tableName="mgy_customer_basic" 
-			domainObjectName="MgyCustomerBasic" enableCountByExample="true" enableUpdateByExample="true" 
-			enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table> 
-			<table tableName="mgy_customer_history_info" domainObjectName="MgyCustomerHistoryInfo" 
-			enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" 
-			enableSelectByExample="true" selectByExampleQueryId="true"></table> <table 
-			tableName="mgy_customer_white" domainObjectName="MgyCustomerWhite" enableCountByExample="true" 
-			enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" 
-			selectByExampleQueryId="true"></table> <table tableName="mgy_file_info" domainObjectName="MgyFileInfo" 
-			enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" 
-			enableSelectByExample="true" selectByExampleQueryId="true"></table> <table 
-			tableName="mgy_job_assign_info" domainObjectName="MgyJobAssignInfo" enableCountByExample="true" 
-			enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" 
-			selectByExampleQueryId="true"></table> <table tableName="mgy_job_order_tran_info" 
-			domainObjectName="MgyJobOrderTranInfo" enableCountByExample="true" enableUpdateByExample="true" 
-			enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table> 
-			<table tableName="mgy_lock_info" domainObjectName="MgyLockInfo" enableCountByExample="true" 
-			enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" 
-			selectByExampleQueryId="true"></table> <table tableName="mgy_lock_password_tran_info" 
-			domainObjectName="MgyLockPasswordTranInfo" enableCountByExample="true" enableUpdateByExample="true" 
-			enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table> 
-			<table tableName="mgy_lunbo_info" domainObjectName="MgyLunboInfo" enableCountByExample="true" 
-			enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" 
-			selectByExampleQueryId="true"></table> <table tableName="mgy_maintenance_info" 
-			domainObjectName="MgyMaintenanceInfo" enableCountByExample="true" enableUpdateByExample="true" 
-			enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table> 
-			<table tableName="mgy_maintenance_order_info" domainObjectName="MgyMaintenanceOrderInfo" 
-			enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" 
-			enableSelectByExample="true" selectByExampleQueryId="true"></table> <table 
-			tableName="mgy_maintenance_train_info" domainObjectName="MgyMaintenanceTrainInfo" 
-			enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" 
-			enableSelectByExample="true" selectByExampleQueryId="true"></table> <table 
-			tableName="mgy_order_ticket_info" domainObjectName="MgyOrderTicketInfo" enableCountByExample="true" 
-			enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" 
-			selectByExampleQueryId="true"></table> <table tableName="mgy_pay_order_info" 
-			domainObjectName="MgyPayOrderInfo" enableCountByExample="true" enableUpdateByExample="true" 
-			enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table> 
-			<table tableName="mgy_pay_order_tran_info" domainObjectName="MgyPayOrderTranInfo" 
-			enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" 
-			enableSelectByExample="true" selectByExampleQueryId="true"></table> <table 
-			tableName="mgy_product_appointment_info" domainObjectName="MgyProductAppointmentInfo" 
-			enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" 
-			enableSelectByExample="true" selectByExampleQueryId="true"></table> -->
-	</context>
+  <context id="context1">
+    <!--取消注释  插件会生成很多注释 -->
+     <commentGenerator>
+        <property name="suppressAllComments" value="true"/>
+    </commentGenerator>
+    <!-- 连接数据库   connectionURL：-->
+    <jdbcConnection connectionURL="jdbc:mysql://123.56.30.228:3306/monkeyKing" driverClass="com.mysql.jdbc.Driver" userId="root" password="1q2w3e4r" />
+      <!-- 生成pojo位置 -->
+    <javaModelGenerator targetPackage="com.monkey.bussiness.dto" targetProject="monkeyKing/src/main/java"/>
+     <!-- mapper生成位置 -->
+    <sqlMapGenerator targetPackage="mapper" targetProject="monkeyKing/src/main/resources" />
+    <!-- targetPackage：mapper接口生成的位置 -->  
+    <javaClientGenerator targetPackage="com.monkey.bussiness.mapper" targetProject="monkeyKing/src/main/java" type="XMLMAPPER" />
+    <!--数据库里面的表名  -->
+    <table  tableName="clinic_user"></table>
+  </context>
+
 </generatorConfiguration>

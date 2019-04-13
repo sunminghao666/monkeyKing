@@ -8,6 +8,8 @@
  *********************************************************/
 package com.monkey.bussiness.dao;
 
+import java.util.List;
+
 import com.monkey.bussiness.dto.CureProject;
 
 public interface CureProjectDao {
@@ -22,4 +24,13 @@ public interface CureProjectDao {
 	 */
 	CureProject searchCureProjectForDto(Long cureProjectId);
 
+	/**
+	  * 查询治疗项目
+	 * 
+	 * @param
+	 * @since 2019-04-07 10:00:00
+	 * @author SunMinghao
+	 * @return
+	 */
+	List<CureProject> searchCureProjectForList(Long cureProjectId, String cureProjectName, Integer effectiveFlag);
 }

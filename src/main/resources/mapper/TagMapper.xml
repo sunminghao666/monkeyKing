@@ -24,7 +24,7 @@
 					tag_type = #{tagType,jdbcType=INTEGER}
 				</if>
 				<if test="effectiveFlag != null">
-					effective_flag = #{effectiveFlag,jdbcType=INTEGER}
+					and effective_flag = #{effectiveFlag,jdbcType=INTEGER}
 				</if>
 			</where>
 	</select>

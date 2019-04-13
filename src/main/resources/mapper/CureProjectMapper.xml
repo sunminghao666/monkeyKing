@@ -22,7 +22,14 @@
 				<if test="id != null">
 					id = #{id,jdbcType=BIGINT}
 				</if>
+				<if test="cureProjectName != null">
+					and cure_project_name = #{cureProjectName,jdbcType=VARCHAR}
+				</if>
+				<if test="effectiveFlag != null">
+					and effective_flag = #{effectiveFlag,jdbcType=INTEGER}
+				</if>
 			</where>
+			order by gmtCreate desc
 	</select>
 
 </mapper>

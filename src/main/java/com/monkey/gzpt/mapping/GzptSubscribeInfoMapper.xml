@@ -399,7 +399,7 @@
 		gzpt_subscribe_info g
 		LEFT JOIN clinic_user c ON g.customer_id = c.id
 		WHERE
-		c.phone_no = = #{phone,jdbcType=VARCHAR}
+		c.phone_no = #{phone,jdbcType=VARCHAR}
 	</select>
 
 </mapper>

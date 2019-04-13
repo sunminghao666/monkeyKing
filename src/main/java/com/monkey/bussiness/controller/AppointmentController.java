@@ -20,9 +20,11 @@ import com.monkey.bussiness.bean.reqBean.SaveAppBean;
 import com.monkey.bussiness.enums.MonkeyKingReturnEnum;
 import com.monkey.bussiness.service.AppointmentService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 
+@Api(value="/userApp", tags="预约管理模块")
 @RestController
 @RequestMapping("/userApp")
 public class AppointmentController {
