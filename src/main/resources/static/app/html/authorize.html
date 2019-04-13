@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="format-detection" content="email=no" />
+<script src="../js/util/zepto.min.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="../js/util/base.js" type="text/javascript" charset="utf-8"></script>
+<script>
+	var code = '';
+	var state = '';
+	$(function() {
+		code = getUrlParam('code');
+		state = getUrlParam('state');
+		var obj = {
+			"username" : wx_userName,
+			"code" : code
+		};
+		var sendData = {
+			request : obj
+		};
+		sendData = "jsonKey=" + aesEncrypt(JSON.stringify(sendData));
+		$
+				.ajax({
+					async : false,
+					type : "post",
+					url : base.domain + "wxBasic/authorize.do",
+					data : sendData,
+					dataType : 'json',
+					success : function(param) {
+						if (param.messageCode = '000000') {
+							var flag = param.returns.flag;
+							var customerId = param.returns.customerId;
+							var openid = param.returns.openid;
+							var timestamp = new Date().getTime();
+							var head = {};
+							head.timestamp = timestamp;
+							head.openId = openid;
+							if ($.isNull(customerId) && flag == 1) {
+								head.userName = null;
+								head.customerId = null;
+								head.role = null;
+							} else {
+								head.userName = param.returns.userName;
+								head.customerId = customerId;
+								head.role = param.returns.role;
+							}
+							if (state == 'index') {
+
+								if ($.isNull(customerId) && flag == 1) {
+									head.role = '00';
+									var data = {
+										"head" : head,
+										"body" : null
+									};
+									var jsonStr = JSON.stringify(data);
+									jsonStr = UrlEncode(jsonStr);
+									/* 	var url = base.domain
+																				+ "mgy/html/index/userBind.html?jsonKey="
+																				+ jsonStr; */
+
+									var url = base.domain
+											+ "mgy/html/index/index.html?jsonKey="
+											+ jsonStr;
+									window.location.href = url;
+								} else {
+									head.isAgent = param.returns.isAgent;
+									var data = {
+										"head" : head,
+										"body" : null
+									};
+									var jsonStr = JSON.stringify(data);
+									jsonStr = UrlEncode(jsonStr);
+									var url = base.domain
+											+ "mgy/html/index/index.html?jsonKey="
+											+ jsonStr;
+									window.location.href = url;
+								}
+
+							} else {
+								var data = {
+									"head" : head,
+									"body" : {
+										"orderId" : state,
+										"customerId" : customerId
+									}
+								};
+								var jsonStr = JSON.stringify(data);
+								jsonStr = UrlEncode(jsonStr);
+								window.location.href = base.domain
+										+ "mgy/html/jobOrderManage/jobworkDetail.html?jsonKey="
+										+ jsonStr;
+							}
+						}
+					},
+					error : function() {
+						alert("请求服务超时");
+					}
+				});
+
+	})
+</script>
+<title></title>
+</head>
+<body>
+</body>
+</html>

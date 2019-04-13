@@ -309,21 +309,24 @@
 		select
 		<include refid="Base_Column_List" />
 		from gzpt_subscribe_info
-		where customer_id = #{customerId,jdbcType=BIGINT}
+		where customer_id =
+		#{customerId,jdbcType=BIGINT}
 	</select>
-	
+
 	<select id="selectByCustomerIdAndSubscribe" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from gzpt_subscribe_info
-		where customer_id = #{customerId,jdbcType=BIGINT} 
+		where customer_id =
+		#{customerId,jdbcType=BIGINT}
 		and subscribe = '1'
 	</select>
-		<select id="selectByCustomerIdAndOpenId" resultMap="BaseResultMap">
+	<select id="selectByCustomerIdAndOpenId" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from gzpt_subscribe_info
-		where customer_id = #{customerId,jdbcType=BIGINT}
+		where customer_id =
+		#{customerId,jdbcType=BIGINT}
 		and openid = #{openId,jdbcType=VARCHAR}
 	</select>
 	<update id="updateByCustomerId" parameterType="com.monkey.gzpt.pojo.GzptSubscribeInfo">
@@ -389,4 +392,14 @@
 		</set>
 		where customer_id = #{customerId,jdbcType=BIGINT}
 	</update>
+	<select id="selectByUserName" resultMap="BaseResultMap">
+		SELECT
+		g.*
+		FROM
+		gzpt_subscribe_info g
+		LEFT JOIN clinic_user c ON g.customer_id = c.id
+		WHERE
+		c.phone_no = = #{phone,jdbcType=VARCHAR}
+	</select>
+
 </mapper>
