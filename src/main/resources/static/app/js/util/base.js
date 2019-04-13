@@ -10,10 +10,10 @@ if (typeof tit !== 'object') {
 }
 var wx_userName = 'monkey';
 var method;
-document.write("<script type='text/javascript' src='" + base.url
-		+ "app/js/util/rollups/aes.js' ><\/script>");
-document.write("<script type='text/javascript' src='" + base.url
-		+ "app/js/util/components/pad-iso10126-min.js' ><\/script>");
+//document.write("<script type='text/javascript' src='" + base.url
+//		+ "app/js/util/components/aes.js' ><\/script>");
+//document.write("<script type='text/javascript' src='" + base.url
+//		+ "app/js/util/components/pad-iso10126-min.js' ><\/script>");
 function URLencodeForBase64(a) {
 	return escape(a).replace(/\+/g, "%2B").replace(/\"/g, "%22").replace(/\'/g,
 			"%27").replace(/\//g, "%2F")

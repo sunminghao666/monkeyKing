@@ -15,19 +15,15 @@
 	$(function() {
 		code = getUrlParam('code');
 		state = getUrlParam('state');
-		var obj = {
-			"username" : wx_userName,
+	
+		var sendData = {
 			"code" : code
 		};
-		var sendData = {
-			request : obj
-		};
-		sendData = "jsonKey=" + aesEncrypt(JSON.stringify(sendData));
-		$
-				.ajax({
+		alert(code);
+		$.ajax({
 					async : false,
-					type : "post",
-					url : base.domain + "wxBasic/authorize.do",
+					type : "get",
+					url : base.domain + "wxBasic/authorize",
 					data : sendData,
 					dataType : 'json',
 					success : function(param) {

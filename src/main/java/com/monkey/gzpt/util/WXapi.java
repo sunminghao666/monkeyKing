@@ -23,7 +23,7 @@ import com.monkey.gzpt.dto.WxConfig;
 import com.monkey.gzpt.pojo.GzptInfo;
 import com.monkey.gzpt.pojo.GzptSubscribeInfo;
 import com.monkey.taf.common.Tools;
-import com.monkey.taf.context.AppContext;
+import com.monkey.taf.context.SpringUtil;
 import com.monkey.taf.log.TAFLog;
 import com.monkey.taf.web.util.Status;
 
@@ -34,7 +34,7 @@ import com.monkey.taf.web.util.Status;
  * 
  */
 public class WXapi {
-
+ 
     /**
      * 
      * 【方法功能描述】获取AccessToken的方法
@@ -49,7 +49,7 @@ public class WXapi {
     public static String getAccessToken() {
         Map < String, String > params = new HashMap < String, String >();
         String accessToken = null;
-        GzptInfoMapper gzptInfoMapper = AppContext.getBean("gzptInfoMapper", GzptInfoMapper.class);
+        GzptInfoMapper gzptInfoMapper = SpringUtil.getBean("gzptInfoMapper", GzptInfoMapper.class);
         List < GzptInfo > list = gzptInfoMapper.selectByUserName(ConfigInfo.getByProperties("wx.userName"));// 在数据库中查询
         if (list.size() >= 0) {
             GzptInfo gzptInfo = list.get(0);
@@ -98,7 +98,7 @@ public class WXapi {
      * @date：2018年2月28日 下午2:33:01
      */
     public static String getJsapiTicket() {
-        GzptInfoMapper gzptInfoMapper = AppContext.getBean("gzptInfoMapper", GzptInfoMapper.class);
+        GzptInfoMapper gzptInfoMapper = SpringUtil.getBean("gzptInfoMapper", GzptInfoMapper.class);
         List < GzptInfo > gzptInfos = gzptInfoMapper.selectByUserName(ConfigInfo.getByProperties("wx.userName"));
         if (gzptInfos.size() > 0) {
             GzptInfo gzptInfo = gzptInfos.get(0);
@@ -162,7 +162,7 @@ public class WXapi {
      * @date：2018年2月28日 下午2:33:40
      */
     public static WxConfig getJsapiTicket(String url) {
-        GzptInfoMapper gzptInfoMapper = AppContext.getBean("gzptInfoMapper", GzptInfoMapper.class);
+        GzptInfoMapper gzptInfoMapper = SpringUtil.getBean("gzptInfoMapper", GzptInfoMapper.class);
         String jsapi_ticket = WXapi.getJsapiTicket();
         if (jsapi_ticket == null) {
             return null;
@@ -926,9 +926,10 @@ public class WXapi {
      */
     public static void wxAuthorize(String code, Status status) {
         try {
-            GzptInfoMapper gzptInfoMapper = AppContext.getBean("gzptInfoMapper", GzptInfoMapper.class);
+            GzptInfoMapper gzptInfoMapper = SpringUtil.getBean("gzptInfoMapper", GzptInfoMapper.class);
             // 拼装业务报文
             Map < String, String > jsonMap = new HashMap < String, String >();
+            System.out.println(ConfigInfo.getByProperties("wx.userName"));
             List < GzptInfo > list = gzptInfoMapper.selectByUserName(ConfigInfo.getByProperties("wx.userName"));// 在数据库中查询
             if (list.size() >= 0) {
                 GzptInfo gzptInfo = list.get(0);
